@@ -21,8 +21,8 @@ const gameCategories = [
  {name:'Delta Force',group:'Game',products:[['18+1 Delta Coins',5400],['30+2 Delta Coins',8100],['60+3 Delta Coins',15900],['300+36 Delta Coins',79201],['420+62 Delta Coins',108901],['680+105 Delta Coins',152702],['1280+264 Delta Coins',305103],['1680+385 Delta Coins',381304],['3280+834 Delta Coins',762308],['6480+1944 Delta Coins',1524615],['12960+3888 Delta Coins',3049230],['19440+5832 Delta Coins',4573846]].map(([n,p])=>product(n,p))},
  {name:'ZEPETO',group:'Game',products:[['14 Zems',14500,17000],['28 Zems',30800],['58 Zems',61800],['128 Zems',131500],['323 Zems',332600],['1000 Zems',1000000],['4680 Coins',15800],['9700 Coins',30800],['25200 Coins',77200],['40700 Coins',123700],['110000 Coins',324800],['300000 Coins',863600],['Premium (1M)',63800]].map(([n,p,o])=>product(n,p,o))},
  {name:'Undawn',group:'Game',products:[['Kartu Mingguan',27900],['Kartu Bulanan',46300],['Dana Elit (REBATE LV 80)',122900],['Glory Pass Premium',139150],['80 RC',14400],['250 RC',43200],['450 RC',72000],['920 RC',143040],['1850 RC',287040],['2800 RC',431040],['4750 RC',719040],['9600 RC',1439040],['33000 RC',4800000],['66500 RC',9600000]].map(([n,p])=>product(n,p))},
- {name:'Call of Duty Mobile ID',group:'Game',products:[['63 CP',9500,10000],['128 CP',20000],['321 CP',50000],['645 CP',100000],['1373 CP',200000],['2060 CP',300000],['3564 CP',500000],['7656 CP',1000000]].map(([n,p,o])=>product(n,p,o))},
-   {name:'Arena of Valor',group:'Game',products:[['40 Vouchers',10000],['90 Vouchers',20000],['230 Vouchers',50000],['470 Vouchers',100000],['950 Vouchers',200000],['1430 Vouchers',300000],['2390 Vouchers',500000]].map(([n,p])=>product(n,p))},
+   {name:'Call of Duty Mobile ID',group:'Game',products:[['63 CP',9500,10000],['128 CP',20000],['321 CP',50000],['645 CP',100000],['1373 CP',200000],['2060 CP',300000],['3564 CP',500000],['7656 CP',1000000]].map(([n,p,o])=>product(n,p,o))},
+ {name:'Arena of Valor',group:'Game',products:[['40 Vouchers',10000],['90 Vouchers',20000],['230 Vouchers',50000],['470 Vouchers',100000],['950 Vouchers',200000],['1430 Vouchers',300000],['2390 Vouchers',500000]].map(([n,p])=>product(n,p))},
  {name:'AFK Journey',group:'Game',products:[['21 Dragon Crystals (20+1)',15624],['126 Dragon Crystals (120+6)',77144],['294 Dragon Crystals (280+14)',155264],['588 Dragon Crystals (560+28)',321269],['1554 Dragon Crystals (1480+74)',780224],['3150 Dragon Crystals (3000+150)',1561424],['Esperia Monthly - Classic Gazette',77144],['Esperia Monthly - Premium Gazette',243149],['Growth Bundle',467744]].map(([n,p])=>product(n,p))},
  {name:'Cloud Song: Saga of Skywalkers',group:'Game',products:[['0.99$ Tickets',11303],['1.99$ Tickets',18836],['2.99$ Tickets',33906],['5.99$ Tickets',67812],['11.99$ Tickets',135623],['21.99$ Tickets',271248],['29.99$ Tickets',339060],['59.99$ Tickets',678119],['99.99$ Tickets',1356238]].map(([n,p])=>product(n,p))},
  {name:'Mob Rush',group:'Game',products:[['100 Diamonds',16093],['300 Diamonds',48278],['500 Diamonds',80464],['1000 Diamonds',160928],['2000 Diamonds',321856],['3000 Diamonds',482784],['5000 Diamonds',804640],['10000 Diamonds',1609280],['Top Value Pack',4828],['Super Value Hero Pack',16093],['Diamond Benefits Weekly',19311],['Diamond Benefits Monthly',38623],['Account Growth Fund (Normal)',48278],['Account Growth Fund (Advanced)',128742],['BattlePass',80464]].map(([n,p])=>product(n,p))},
@@ -34,8 +34,8 @@ const gameCategories = [
  {name:'VALORANT',group:'PC Game',products:[['475 VP',52719],['1000 VP',105439,112000],['1475 VP',158159],['2050 VP',210878,224000],['2525 VP',263597],['3050 VP',316317],['3650 VP',366213],['4125 VP',418932],['4650 VP',471651],['5350 VP',526253],['5700 VP',577090],['5825 VP',578973],['6350 VP',631692],['7300 VP',732424],['7400 VP',737132],['9000 VP',892466],['11000 VP',1034620],['11475 VP',1087339],['12000 VP',1140059],['13050 VP',1245498],['14650 VP',1400833],['15100 VP',1456376],['16350 VP',1560873],['16700 VP',1611710],['18300 VP',1767044],['20000 VP',1927086],['22000 VP',2069240]].map(([n,p,o])=>product(n,p,o))},
  {name:'League of Legends - PC',group:'PC Game',products:[['575 RP',58300,66600],['1380 RP',136000],['2800 RP',272000],['4500 RP',427400],['6500 RP',602200],['13500 RP',1165400]].map(([n,p,o])=>product(n,p,o))},
  {name:'Marvel Rivals',group:'PC Game',products:[['100 Lattices',18065],['500 Lattices',90523],['1000 Lattices',182435],['2180 Lattices',365069],['5680 Lattices',912969],['11680 Lattices',1826137]].map(([n,p])=>product(n,p))},
- {name:'Vidio',group:'Entertainment',fields:['Email / Nomor Vidio'],products:[['Ultimate All Screen 1 Tahun',1379000,1514000],['Ultimate Mobile 30 Hari',105000,109000],['Ultimate Mobile 1 Tahun',765000,859000],['Ultimate All Screen 30 Hari',200000,238000],['Ultimate Mobile 3 Bulan',263158],['Platinum 30 Hari',54000],['Platinum Extra 30 Hari',76000],['Platinum 3 Bulan',118000],['Platinum Extra 3 Bulan',187000],['Platinum 1 Tahun',398000],['Platinum Extra 1 Tahun',553000]].map(([n,p,o])=>product(n,p,o))},
-   {name:'Poppo Live',group:'Entertainment',fields:['User ID'],products:[['1000 Coins',2184],['7000 Coins',14690],['21000 Coins',44070],['25500 Coins',53599],['43500 Coins',91912],['43750 Coins',92508],['70000 Coins',146901],['83000 Coins',174891],['88000 Coins',185810],['88990 Coins',187993],['178000 Coins',375987],['180000 Coins',380553],['210000 Coins',440703],['270000 Coins',570730],['273000 Coins',576685],['252000 Coins',731725],['350000 Coins',734504],['430000 Coins',910785],['450000 Coins',950488],['455000 Coins',962201],['700000 Coins',1469009],['1050000 Coins',2203513],['1400000 Coins',2938017],['1750000 Coins',3672522],['2100000 Coins',4407026],['2450000 Coins',5141530],['2800000 Coins',5876035],['3150000 Coins',6610539],['3500000 Coins',7345044],['4200000 Coins',8814052],['4900000 Coins',10283061],['5600000 Coins',11752070],['6300000 Coins',13221078],['7000000 Coins',14690087],['8750000 Coins',18362609],['10500000 Coins',22035131],['12250000 Coins',25707652],['14000000 Coins',29380174],['15750000 Coins',33052696],['17500000 Coins',36725218],['19250000 Coins',40397739],['21000000 Coins',44070261],['24500000 Coins',51415305],['28000000 Coins',58760348],['31500000 Coins',66105392],['35000000 Coins',73450435]].map(([n,p])=>product(n,p))},
+   {name:'Vidio',group:'Entertainment',fields:['Email / Nomor Vidio'],products:[['Ultimate All Screen 1 Tahun',1379000,1514000],['Ultimate Mobile 30 Hari',105000,109000],['Ultimate Mobile 1 Tahun',765000,859000],['Ultimate All Screen 30 Hari',200000,238000],['Ultimate Mobile 3 Bulan',263158],['Platinum 30 Hari',54000],['Platinum Extra 30 Hari',76000],['Platinum 3 Bulan',118000],['Platinum Extra 3 Bulan',187000],['Platinum 1 Tahun',398000],['Platinum Extra 1 Tahun',553000]].map(([n,p,o])=>product(n,p,o))},
+ {name:'Poppo Live',group:'Entertainment',fields:['User ID'],products:[['1000 Coins',2184],['7000 Coins',14690],['21000 Coins',44070],['25500 Coins',53599],['43500 Coins',91912],['43750 Coins',92508],['70000 Coins',146901],['83000 Coins',174891],['88000 Coins',185810],['88990 Coins',187993],['178000 Coins',375987],['180000 Coins',380553],['210000 Coins',440703],['270000 Coins',570730],['273000 Coins',576685],['252000 Coins',731725],['350000 Coins',734504],['430000 Coins',910785],['450000 Coins',950488],['455000 Coins',962201],['700000 Coins',1469009],['1050000 Coins',2203513],['1400000 Coins',2938017],['1750000 Coins',3672522],['2100000 Coins',4407026],['2450000 Coins',5141530],['2800000 Coins',5876035],['3150000 Coins',6610539],['3500000 Coins',7345044],['4200000 Coins',8814052],['4900000 Coins',10283061],['5600000 Coins',11752070],['6300000 Coins',13221078],['7000000 Coins',14690087],['8750000 Coins',18362609],['10500000 Coins',22035131],['12250000 Coins',25707652],['14000000 Coins',29380174],['15750000 Coins',33052696],['17500000 Coins',36725218],['19250000 Coins',40397739],['21000000 Coins',44070261],['24500000 Coins',51415305],['28000000 Coins',58760348],['31500000 Coins',66105392],['35000000 Coins',73450435]].map(([n,p])=>product(n,p))},
  {name:'BIGO LIVE',group:'Entertainment',fields:['User ID'],products:[['25 Diamonds',8995],['50 Diamonds',17989],['100 Diamonds',35978],['150 Diamonds',54172],['200 Diamonds',72161],['250 Diamonds',90150],['300 Diamonds',108139],['500 Diamonds',180299],['750 Diamonds',270449],['1000 Diamonds',360598],['2000 Diamonds',720992],['3000 Diamonds',1081591],['4000 Diamonds',1441985],['5000 Diamonds',1802583],['7500 Diamonds',2703875],['10000 Diamonds',3605166],['20000 Diamonds',7210332],['30000 Diamonds',10815499],['50000 Diamonds',18025831]].map(([n,p])=>product(n,p))},
  {name:'LIKE',group:'Entertainment',fields:['User ID'],products:[['100 Diamonds',35777],['200 Diamonds',71553],['500 Diamonds',178491],['1000 Diamonds',356981],['1500 Diamonds',535472],['2000 Diamonds',713961],['2500 Diamonds',892452],['3000 Diamonds',1070942],['3500 Diamonds',1249433],['4000 Diamonds',1427923],['4500 Diamonds',1606414],['5000 Diamonds',1784706],['10000 Diamonds',3569414],['20000 Diamonds',7138828]].map(([n,p])=>product(n,p))},
  {name:'WeTV',group:'Entertainment',fields:['Email / ID akun WeTV'],products:[['1 Month VIP',48000,55000],['3 Months VIP',136700],['12 Months VIP',475700]].map(([n,p,o])=>product(n,p,o))},
@@ -44,7 +44,7 @@ const gameCategories = [
  {name:'Loby',group:'Entertainment',fields:['User ID'],products:[['299 Coin',54216],['650 Coin',90396],['990 Coin',144504],['2500 Coin',324648],['5000 Coin',626832],['10000 Coin',1165860],['20000 Coin',2268216],['50000 Coin',5387688]].map(([n,p])=>product(n,p))}
 ];
 
-// Free Fire MAX mengikuti daftar sumber, dengan harga khusus untuk 1000 dan 7290 Diamonds.
+// Free Fire MAX mengikuti daftar yang dikirim; 1000 dan 7290 Diamonds memakai harga khusus FF MAX.
 const ff = gameCategories.find(c=>c.name==='Free Fire');
 const ffmax = gameCategories.find(c=>c.name==='Free Fire MAX');
 ffmax.products = ff.products.filter(p=>p.name!=='12 Diamonds').map(p=>{
@@ -56,297 +56,97 @@ ffmax.products = ff.products.filter(p=>p.name!=='12 Diamonds').map(p=>{
 let activeGroup = 'Game';
 let selected = null;
 let selectedCategory = null;
-let activeSubcategory = 'Semua';
+let selectedImage = null;
 let pendingMessage = '';
-let toastTimer;
-
-const $ = (id) => document.getElementById(id);
-const categoryGrid = $('categoryGrid');
-const searchInput = $('searchInput');
+const categoryGrid = document.getElementById('categoryGrid');
+const searchInput = document.getElementById('searchInput');
 const tabs = [...document.querySelectorAll('.tab')];
-const orderForm = $('orderForm');
-const categoryPage = $('categoryPage');
-const categoryPageTitle = $('categoryPageTitle');
-const categoryPageImage = $('categoryPageImage');
-const subcategoryFilters = $('subcategoryFilters');
-const categoryProductGrid = $('categoryProductGrid');
+const orderForm = document.getElementById('orderForm');
+const dialog = document.getElementById('paymentDialog');
 
-function finalPrice(item, categoryName) {
+function finalPrice(item, category) {
   if (item.price == null) return null;
-  return categoryName === 'Mobile Legends' ? item.price : item.price + 200;
+  return category === 'Mobile Legends' ? item.price : item.price + 200;
 }
-function rupiah(value) {
-  return value == null ? 'Harga belum diisi' : 'Rp' + Math.round(value).toLocaleString('id-ID');
-}
-function escapeHtml(value) {
-  return String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-}
+function rupiah(value) { return value == null ? 'Harga belum diisi' : 'Rp' + Math.round(value).toLocaleString('id-ID'); }
+function escapeHtml(value) { return String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 function categoryImage(name) { return IMG[name] || 'logolixerastore.jpg'; }
-function setText(id, value) { const el = $(id); if (el) el.textContent = value; }
-function showToast(message) {
-  const toast = $('toast');
-  toast.textContent = message;
-  toast.classList.remove('hidden');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => toast.classList.add('hidden'), 3200);
-}
-function imageMarkup(name, className) {
-    const src = escapeHtml(categoryImage(name));
-  return `<img class="${className}" loading="lazy" src="${src}" alt="${escapeHtml(name)}" onerror="this.onerror=null;this.src='logolixerastore.jpg'">`;
-}
-function categoryCard(category) {
-  const card = document.createElement('article');
-  card.className = 'category-card';
-  const button = document.createElement('button');
-  button.type = 'button';
-  button.className = 'category-button';
-  button.innerHTML = `<div class="category-image-wrap">${imageMarkup(category.name, 'category-image')}</div><div class="category-card-title"><span>${escapeHtml(category.name)}</span><span class="chevron">›</span></div>`;
-  button.addEventListener('click', () => openCategory(category));
-  card.appendChild(button);
-  return card;
-}
 function renderCategories() {
   const query = searchInput.value.trim().toLocaleLowerCase('id');
-  const list = gameCategories.filter(c => c.group === activeGroup && c.name.toLocaleLowerCase('id').includes(query));
+  const list = gameCategories.filter(c=>c.group===activeGroup && c.name.toLocaleLowerCase('id').includes(query));
   categoryGrid.innerHTML = '';
-  list.forEach(category => categoryGrid.appendChild(categoryCard(category)));
-  $('emptyState').classList.toggle('hidden', list.length > 0);
-}
-function productGroup(name) {
-  const n = name.toLocaleLowerCase('id');
-  if (n.includes('weekly diamond pass')) return 'Weekly Diamond Pass';
-  if (n.includes('twilight pass')) return 'Twilight Pass';
-  if (n.includes('weekly') || n.includes('mingguan')) return 'Paket Mingguan';
-  if (n.includes('monthly') || n.includes('bulanan') || n.includes('1 month') || n.includes('3 months') || n.includes('12 months')) return 'Paket Bulanan / VIP';
-  if (n.includes('pass') || n.includes('bundle') || n.includes('card') || n.includes('gazette') || n.includes('benefit') || n.includes('benefits') || n.includes('premium') || n.includes('membership') || n.includes('member') || n.includes('vip') || n.includes('level up')) return 'Pass & Paket';
-  if (n.includes('diamond')) return 'Diamonds';
-  if (n.includes('uc')) return 'UC';
-  if (n.includes('vp') || n.includes('rp') || n.includes('lattices')) return 'Currency';
-  if (n.includes('coin')) return 'Coins';
-  if (n.includes('token')) return 'Tokens';
-  if (n.includes('zem')) return 'Zems';
-  if (n.includes('point') || n.includes('silver')) return 'Points';
-  return 'Lainnya';
-}
-function openCategory(category) {
-  selectedCategory = category;
-  activeSubcategory = 'Semua';
-  categoryGrid.classList.add('hidden');
-  $('emptyState').classList.add('hidden');
-  categoryPage.classList.remove('hidden');
-  categoryPageTitle.textContent = category.name;
-  categoryPageImage.src = categoryImage(category.name);
-  categoryPageImage.onerror = () => {
-    categoryPageImage.onerror = null;
-    categoryPageImage.src = 'logolixerastore.jpg';
-  };
-  searchInput.value = '';
-  renderSubcategories();
-  renderProducts();
-  categoryPage.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-function closeCategory() {
-  categoryPage.classList.add('hidden');
-  categoryGrid.classList.remove('hidden');
-  renderCategories();
-  $('katalog').scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-function renderSubcategories() {
-  const groups = ['Semua', ...new Set(selectedCategory.products.map(p => productGroup(p.name)))];
-  subcategoryFilters.innerHTML = '';
-  groups.forEach(group => {
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'subcategory-filter' + (group === activeSubcategory ? ' active' : '');
-    button.textContent = group;
-    button.addEventListener('click', () => {
-      activeSubcategory = group;
-      renderSubcategories();
-      renderProducts();
+  document.getElementById('emptyState').classList.toggle('hidden', list.length > 0);
+  list.forEach(category=>{
+    const card = document.createElement('article'); card.className='category-card';
+    const button = document.createElement('button'); button.type='button'; button.className='category-button'; button.setAttribute('aria-expanded','false');
+    button.innerHTML = `<div class="category-image-wrap"><img class="category-image" loading="lazy" src="${categoryImage(category.name)}" alt="${escapeHtml(category.name)}" onerror="this.onerror=null;this.src='logolixerastore.jpg'"></div><div class="category-card-title"><span>${escapeHtml(category.name)}</span><span class="chevron">⌄</span></div>`;
+    const panel=document.createElement('div');panel.className='product-panel hidden';
+    panel.innerHTML=`<div class="product-panel-head">Pilih nominal / paket</div><div class="product-list"></div>`;
+    const listEl=panel.querySelector('.product-list');
+    category.products.forEach((item,index)=>{
+      const price=finalPrice(item,category.name);
+      const old=item.oldPrice;
+      const btn=document.createElement('button');btn.type='button';btn.className='product-option';
+      const shownName=item.name;
+      btn.innerHTML=`<span class="product-option-name">${escapeHtml(shownName)}</span><span class="product-prices"><span class="product-price">${rupiah(price)}</span>${old && old > price?`<span class="old-price">${rupiah(old)}</span>`:''}</span>`;
+      if(price==null){btn.title='Harga belum dimasukkan';btn.disabled=true;btn.style.opacity='.55';}
+      else btn.addEventListener('click',()=>chooseProduct(category,item,btn));
+      listEl.appendChild(btn);
     });
-    subcategoryFilters.appendChild(button);
+    button.addEventListener('click',()=>{
+      const willOpen=panel.classList.contains('hidden');
+      categoryGrid.querySelectorAll('.product-panel').forEach(p=>p.classList.add('hidden'));
+      categoryGrid.querySelectorAll('.category-card').forEach(c=>{c.classList.remove('expanded');const b=c.querySelector('.category-button');if(b)b.setAttribute('aria-expanded','false');});
+      if(willOpen){panel.classList.remove('hidden');card.classList.add('expanded');button.setAttribute('aria-expanded','true');}
+    });
+    card.append(button,panel);categoryGrid.appendChild(card);
   });
 }
-function renderProducts() {
-  const query = searchInput.value.trim().toLocaleLowerCase('id');
-  const products = selectedCategory.products.filter(item => {
-    const matchesGroup = activeSubcategory === 'Semua' || productGroup(item.name) === activeSubcategory;
-    const matchesSearch = !query || item.name.toLocaleLowerCase('id').includes(query);
-    return matchesGroup && matchesSearch;
-  });
-  categoryProductGrid.innerHTML = '';
-  $('categoryEmptyState').classList.toggle('hidden', products.length > 0);
-  products.forEach(item => {
-    const price = finalPrice(item, selectedCategory.name);
-    const card = document.createElement('article');
-    card.className = 'product-card' + (
-      selected &&
-      selectedCategory.name === selected.categoryName &&
-      selected.name === item.name ? ' selected' : ''
-    );
-    const oldPrice = item.oldPrice && item.oldPrice > price
-      ? `<span class="product-card-old-price">${rupiah(item.oldPrice)}</span>` : '';
-    card.innerHTML = `<div class="product-card-top"><span class="product-card-icon">◇</span><div class="product-card-name">${escapeHtml(item.name)}</div></div><div class="product-card-price">${rupiah(price)}${oldPrice}</div><button class="product-select-button" type="button">Pilih Produk →</button>`;
-    card.querySelector('button').addEventListener('click', () => chooseProduct(selectedCategory, item));
-    categoryProductGrid.appendChild(card);
-  });
-}
-function chooseProduct(category, item) {
-    selected = { ...item, categoryName: category.name, finalPrice: finalPrice(item, category.name) };
-  setText('summaryCategory', category.name);
-  setText('summaryProduct', item.name);
-  setText('summaryPrice', rupiah(selected.finalPrice));
-  setText('summaryTotal', rupiah(selected.finalPrice));
-  setText('paymentTotal', rupiah(selected.finalPrice));
-
-  $('summaryImage').src = categoryImage(category.name);
-  $('summaryImage').onerror = () => {
-    $('summaryImage').onerror = null;
-    $('summaryImage').src = 'logolixerastore.jpg';
-  };
-
-  $('summaryEmpty').classList.add('hidden');
-  $('summaryDetails').classList.remove('hidden');
-
+function chooseProduct(category,item,btn){
+  selected={...item,finalPrice:finalPrice(item,category.name)};selectedCategory=category.name;selectedImage=categoryImage(category.name);
+  categoryGrid.querySelectorAll('.product-option').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');
+  document.getElementById('summaryEmpty').classList.add('hidden');document.getElementById('summaryDetails').classList.remove('hidden');
+  document.getElementById('summaryImage').src=selectedImage;document.getElementById('summaryProduct').textContent=item.name;document.getElementById('summaryCategory').textContent=category.name;
+  document.getElementById('summaryPrice').textContent=rupiah(selected.finalPrice);document.getElementById('summaryTotal').textContent=rupiah(selected.finalPrice);
   renderGameFields(category);
-  renderProducts();
-  showToast('Produk dipilih. Lengkapi informasi pesanan di bawah.');
-
-  setTimeout(() => {
-    $('pesanan').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, 80);
+  document.getElementById('pesanan').scrollIntoView({behavior:'smooth',block:'start'});
 }
-
-function renderGameFields(category) {
-  const host = $('gameFields');
-  host.innerHTML = '';
-
-  let fields = category.fields;
-
-  if (!fields) {
-    if (category.name === 'Mobile Legends') {
-      fields = ['User ID', 'Server / Zone ID'];
-    } else if (category.name === 'Free Fire' || category.name === 'Free Fire MAX') {
-      fields = ['Player ID'];
-    } else if (category.name === 'VALORANT') {
-      fields = ['Riot ID', 'Tagline'];
-    } else if (category.name === 'League of Legends - PC') {
-      fields = ['Riot ID', 'Tagline', 'Region'];
-    } else {
-      fields = ['User ID'];
-    }
+function renderGameFields(category){
+  const host=document.getElementById('gameFields');host.innerHTML='';
+  let fields=category.fields;
+  if(!fields){
+    if(category.name==='Mobile Legends') fields=['User ID','Server / Zone ID'];
+    else if(['Free Fire','Free Fire MAX','PUBG Mobile','Honor of Kings','Delta Force','Call of Duty Mobile ID','Arena of Valor','AFK Journey','Cloud Song: Saga of Skywalkers','Pixel Gun 3D','Captain Tsubasa: Ace','Racing Master','MU Origin 2','VALORANT','League of Legends - PC','Marvel Rivals'].includes(category.name)) fields=['User ID'];
+    else fields=['User ID'];
   }
-
-  fields.forEach((name, index) => {
-    const label = document.createElement('label');
-    label.className = 'dynamic-label';
-    label.textContent = name + ' *';
-
-    const input = document.createElement('input');
-    input.name = 'playerField' + index;
-    input.id = 'playerField' + index;
-    input.required = true;
-    input.autocomplete = 'off';
-    input.maxLength = 100;
-    input.placeholder = 'Masukkan ' + name.toLocaleLowerCase('id');
-
-    label.appendChild(input);
-    host.appendChild(label);
-  });
+  fields.forEach((name,i)=>{const label=document.createElement('label');label.className='dynamic-label';label.textContent=name;const input=document.createElement('input');input.name='playerField'+i;input.id='playerField'+i;input.required=true;input.autocomplete='off';input.placeholder='Masukkan '+name.toLowerCase();input.maxLength=100;label.appendChild(input);host.appendChild(label);});
 }
-
-orderForm.addEventListener('submit', event => {
+function showToast(message){const old=document.querySelector('.toast');if(old)old.remove();const el=document.createElement('div');el.className='toast';el.textContent=message;document.body.appendChild(el);setTimeout(()=>el.remove(),3000);}
+orderForm.addEventListener('submit',event=>{
   event.preventDefault();
-
-  if (!selected) {
-    showToast('Pilih kategori dan produk terlebih dahulu.');
-    $('katalog').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    return;
-  }
-
-  if (!orderForm.reportValidity()) return;
-
-  const buyer = $('buyerName').value.trim();
-  const contact = $('buyerContact').value.trim();
-  const note = $('buyerNote').value.trim();
-
-  const fields = [...document.querySelectorAll('#gameFields input')].map(input => {
-    const label = input.closest('label').childNodes[0].textContent
-      .replace(' *', '').trim();
-    return `${label}: ${input.value.trim()}`;
-  });
-
-  pendingMessage = [
-    '*PESANAN LIXERA STORE*',
-    '',
-    `Nama: ${buyer}`,
-    contact ? `Kontak: ${contact}` : null,
-    `Kategori: ${selected.categoryName}`,
-    `Produk: ${selected.name}`,
-    `Harga: ${rupiah(selected.finalPrice)}`,
-    ...fields,
-    note ? `Catatan: ${note}` : null,
-    '',
-    'Mohon konfirmasi pesanan dan instruksi pembayaran melalui WhatsApp.'
+    if(!selected){showToast('Pilih kategori dan produk terlebih dahulu.');document.getElementById('katalog').scrollIntoView({behavior:'smooth'});return;}
+  if(!orderForm.reportValidity())return;
+  const buyer=document.getElementById('buyerName').value.trim();const contact=document.getElementById('buyerContact').value.trim();const note=document.getElementById('buyerNote').value.trim();
+  const fields=[...document.querySelectorAll('#gameFields input')].map(input=>`${input.closest('label').childNodes[0].textContent.trim()}: ${input.value.trim()}`);
+  pendingMessage=[
+    '*PESANAN LIXERA STORE*','',`Nama: ${buyer}`,contact?`Kontak: ${contact}`:null,`Kategori: ${selectedCategory}`,`Produk: ${selected.name}`,`Harga: ${rupiah(selected.finalPrice)}`,...fields,note?`Catatan: ${note}`:null,'','Saya akan melakukan pembayaran melalui QRIS. Mohon bantu cek pesanan ini.'
   ].filter(Boolean).join('\n');
-
-  setText('modalTotal', rupiah(selected.finalPrice));
-  $('paymentModal').classList.remove('hidden');
+  document.getElementById('dialogTotal').textContent=rupiah(selected.finalPrice);
+  if(typeof dialog.showModal==='function')dialog.showModal();else showToast('Browser tidak mendukung popup. Coba buka di browser terbaru.');
 });
-
-function closePaymentModal() {
-  $('paymentModal').classList.add('hidden');
-}
-
-$('closePayment').addEventListener('click', closePaymentModal);
-$('cancelPayment').addEventListener('click', closePaymentModal);
-
-$('paymentModal').addEventListener('click', event => {
-  if (event.target === $('paymentModal')) closePaymentModal();
+document.getElementById('closeDialog').addEventListener('click',()=>dialog.close());
+dialog.addEventListener('click',event=>{if(event.target===dialog)dialog.close();});
+document.getElementById('confirmWhatsApp').addEventListener('click',()=>{
+  if(!pendingMessage)return;const url=`https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(pendingMessage)}`;window.open(url,'_blank','noopener,noreferrer');
 });
-
-$('confirmWhatsApp').addEventListener('click', () => {
-  if (!pendingMessage) return;
-
-  const url = `https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(pendingMessage)}`;
-  window.open(url, '_blank', 'noopener,noreferrer');
-});
-
-$('backToCategories').addEventListener('click', closeCategory);
-
-$('changeProduct').addEventListener('click', () => {
-  closeCategory();
-  $('katalog').scrollIntoView({ behavior: 'smooth', block: 'start' });
-});
-
-tabs.forEach(tab => tab.addEventListener('click', () => {
-  activeGroup = tab.dataset.group;
-  tabs.forEach(item => item.classList.toggle('active', item === tab));
-  categoryPage.classList.add('hidden');
-  categoryGrid.classList.remove('hidden');
-  renderCategories();
-}));
-
-searchInput.addEventListener('input', () => {
-  if (!categoryPage.classList.contains('hidden')) {
-    renderProducts();
-  } else {
-    renderCategories();
-  }
-});
-
-$('menuToggle').addEventListener('click', () => {
-  const nav = $('mainNav');
-  const isOpen = nav.classList.toggle('open');
-  $('menuToggle').setAttribute('aria-expanded', String(isOpen));
-});
-
-document.querySelectorAll('#mainNav a').forEach(link => {
-  link.addEventListener('click', () => {
-    $('mainNav').classList.remove('open');
-    $('menuToggle').setAttribute('aria-expanded', 'false');
-  });
-});
-
-$('currentYear').textContent = new Date().getFullYear();
+tabs.forEach(tab=>tab.addEventListener('click',()=>{activeGroup=tab.dataset.group;tabs.forEach(t=>t.classList.toggle('active',t===tab));renderCategories();}));
+searchInput.addEventListener('input',renderCategories);
+document.getElementById('menuToggle').addEventListener('click',()=>document.getElementById('mainNav').classList.toggle('open'));
+document.querySelectorAll('#mainNav a').forEach(a=>a.addEventListener('click',()=>document.getElementById('mainNav').classList.remove('open')));
+// Slider banner otomatis + tombol navigasi dan dots.
+const slides=[...document.querySelectorAll('.hero-slide')];const dotsHost=document.getElementById('sliderDots');let slideIndex=0;let slideTimer;
+slides.forEach((_,i)=>{const dot=document.createElement('button');dot.type='button';dot.setAttribute('aria-label',`Lihat banner ${i+1}`);dot.addEventListener('click',()=>showSlide(i));dotsHost.appendChild(dot);});
+function showSlide(i){slideIndex=(i+slides.length)%slides.length;slides.forEach((s,j)=>s.classList.toggle('active',j===slideIndex));[...dotsHost.children].forEach((d,j)=>d.classList.toggle('active',j===slideIndex));clearInterval(slideTimer);slideTimer=setInterval(()=>showSlide(slideIndex+1),5000);}
+document.getElementById('slidePrev').addEventListener('click',()=>showSlide(slideIndex-1));document.getElementById('slideNext').addEventListener('click',()=>showSlide(slideIndex+1));showSlide(0);
+document.getElementById('year').textContent=new Date().getFullYear();
 renderCategories();
