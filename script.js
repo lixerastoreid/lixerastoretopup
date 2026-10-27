@@ -150,3 +150,319 @@ function showSlide(i){slideIndex=(i+slides.length)%slides.length;slides.forEach(
 document.getElementById('slidePrev').addEventListener('click',()=>showSlide(slideIndex-1));document.getElementById('slideNext').addEventListener('click',()=>showSlide(slideIndex+1));showSlide(0);
 document.getElementById('year').textContent=new Date().getFullYear();
 renderCategories();
+/* ===== LIXERA STORE: TAMPILAN DETAIL KATEGORI ===== */
+(() => {
+  const catalog = document.getElementById('katalog');
+  const grid = document.getElementById('categoryGrid');
+  const heading = catalog.querySelector('.section-heading');
+  const tabs = document.getElementById('categoryTabs');
+  const empty = document.getElementById('emptyState');
+  const order = document.getElementById('pesanan');
+
+  if (!catalog || !grid || !heading || !tabs || !order) return;
+
+  // Buat halaman detail kategori otomatis tanpa mengubah HTML lama.
+  const detail = document.createElement('section');
+  detail.id = 'categoryDetailView';
+  detail.className = 'category-detail-view hidden';
+  detail.innerHTML = `
+    <button type="button" id="backToCatalog" class="back-catalog">
+      ← Kembali ke Katalog
+    </button>
+    <div class="detail-category-heading">
+      <img id="detailCategoryImage" src="logolixerastore.jpg" alt="">
+      <div>
+        <p class="eyebrow">KATEGORI PRODUK</p>
+        <h2 id="detailCategoryTitle"></h2>
+        <p id="detailCategoryDescription">
+          Pilih jenis produk, lalu pilih nominal yang kamu inginkan.
+        </p>
+      </div>
+    </div>
+    <h3 class="detail-section-title">Pilih jenis produk</h3>
+    <div id="subcategoryTabs" class="subcategory-tabs"></div>
+    <h3 class="detail-section-title">Daftar harga</h3>
+    <div id="detailProductList" class="detail-product-list"></div>
+    <p id="detailEmptyState" class="empty-state hidden">
+      Produk tidak ditemukan.
+    </p>
+  `;
+  grid.insertAdjacentElement('afterend', detail);
+
+  const style = document.createElement('style');
+  style.textContent = `
+    .category-detail-view { margin-top: 20px; }
+    .back-catalog {
+      display: inline-block; margin: 0 0 22px; padding: 11px 16px;
+      border: 1px solid #3a4255; border-radius: 11px;
+      background: #171c2d; color: #f5f6fc; font-weight: 700;
+    }
+    .back-catalog:hover { border-color: #b9f45a; color: #b9f45a; }
+    .detail-category-heading {
+      display: flex; align-items: center; gap: 18px;
+      padding: 18px; margin-bottom: 24px;
+      border: 1px solid #282d40; border-radius: 18px;
+      background: #121624;
+    }
+    .detail-category-heading img {
+      width: 100px; height: 100px; object-fit: cover;
+      border-radius: 14px; background: #202539;
+    }
+    .detail-category-heading h2 { margin: 0; overflow-wrap: anywhere; }
+    .detail-category-heading p:last-child { color: #9ba3b8; font-size: 12px; }
+    .detail-section-title { margin: 20px 0 12px; font-size: 15px; }
+    .subcategory-tabs {
+      display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 22px;
+    }
+    .subcategory-btn {
+      border: 1px solid #30364b; border-radius: 10px;
+      padding: 10px 14px; background: #171c2d; color: #dce0ee;
+      font-size: 12px; font-weight: 700;
+    }
+    .subcategory-btn.active {
+      background: #29351e; border-color: #b9f45a; color: #b9f45a;
+    }
+    .detail-product-list { display: grid; gap: 10px; }
+    .detail-product-option {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 12px; width: 100%; padding: 15px;
+      border: 1px solid #282d40; border-radius: 12px;
+      background: #121624; color: #f5f6fc; text-align: left;
+    }
+    .detail-product-option:hover,
+    .detail-product-option.selected {
+      border-color: #b9f45a; background: #20291c;
+    }
+    .detail-product-name { font-size: 13px; font-weight: 700; }
+    .detail-product-price { color: #b9f45a; font-weight: 800; white-space: nowrap; }
+    .detail-product-prices { text-align: right; }
+    .detail-product-prices .old-price { display: block; }
+    @media(max-width:520px) {
+      .detail-category-heading { align-items: flex-start; padding: 12px; gap: 12px; }
+      .detail-category-heading img { width: 72px; height: 72px; }
+      .detail-category-heading h2 { font-size: 20px; }
+      .detail-product-option { padding: 12px 10px; }
+      .detail-product-name { font-size: 11px; }
+      .detail-product-price { font-size: 11px; }
+    }
+  `;
+  document.head.appendChild(style);
+
+  let activeCategory = null;
+  let activeSubcategory = '';
+
+  function priceOf(item, category) {
+    if (item.price == null) return null;
+    return category === 'Mobile Legends' ? item.price : item.price + 200;
+  }
+
+  function subcategoryOf(item, category) {
+    const name = item.name.toLowerCase();
+
+    if (category === 'Mobile Legends') {
+      if (name.includes('weekly diamond pass')) return 'Weekly Diamond Pass';
+      if (name.includes('twilight pass') || name.includes('bundle')) {
+        return 'Pass & Bundle';
+      }
+      if (name.includes('diamond')) return 'Diamond';
+      return 'Produk Lainnya';
+    }
+
+    if (category === 'Free Fire' || category === 'Free Fire MAX') {
+      if (name.includes('member')) return 'Membership';
+      if (name.includes('pass') || name.includes('bp card')) return 'Pass & Bundle';
+      if (name.includes('diamond')) return 'Diamond';
+      return 'Produk Lainnya';
+    }
+
+    if (name.includes('weekly') || name.includes('mingguan')) {
+      return 'Paket Mingguan';
+    }
+    if (name.includes('monthly') || name.includes('bulanan')) {
+      return 'Paket Bulanan';
+    }
+    if (name.includes('pass') || name.includes('bundle') ||
+        name.includes('fund') || name.includes('card')) {
+      return 'Pass & Bundle';
+    }
+    return 'Semua Produk';
+  }
+
+  function openCategory(category) {
+    activeCategory = category;
+    activeSubcategory = '';
+
+    heading.classList.add('hidden');
+    tabs.classList.add('hidden');
+    grid.classList.add('hidden');
+    empty.classList.add('hidden');
+    detail.classList.remove('hidden');
+    order.classList.add('hidden');
+
+    document.getElementById('detailCategoryTitle').textContent = category.name;
+    const image = document.getElementById('detailCategoryImage');
+    image.src = typeof categoryImage === 'function'
+      ? categoryImage(category.name)
+      : 'logolixerastore.jpg';
+    image.onerror = () => { image.onerror = null; image.src = 'logolixerastore.jpg'; };
+
+    renderSubcategories(category);
+    catalog.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function renderSubcategories(category) {
+    const host = document.getElementById('subcategoryTabs');
+    host.innerHTML = '';
+
+    const groups = new Map();
+    category.products.forEach(item => {
+      const label = subcategoryOf(item, category.name);
+      if (!groups.has(label)) groups.set(label, []);
+      groups.get(label).push(item);
+    });
+
+    const names = [...groups.keys()];
+    if (!names.length) {
+      document.getElementById('detailProductList').innerHTML =
+        '<p class="empty-state">Belum ada produk untuk kategori ini.</p>';
+      return;
+    }
+
+    activeSubcategory = names.includes('Diamond') ? 'Diamond' : names[0];
+
+    names.forEach(name => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'subcategory-btn';
+      button.textContent = name;
+      button.classList.toggle('active', name === activeSubcategory);
+
+      button.addEventListener('click', () => {
+        activeSubcategory = name;
+        host.querySelectorAll('.subcategory-btn').forEach(btn => {
+          btn.classList.toggle('active', btn === button);
+        });
+        renderProducts(category, groups.get(name));
+      });
+
+      host.appendChild(button);
+    });
+
+    renderProducts(category, groups.get(activeSubcategory));
+  }
+
+  function renderProducts(category, products) {
+    const host = document.getElementById('detailProductList');
+    const emptyMessage = document.getElementById('detailEmptyState');
+    host.innerHTML = '';
+    emptyMessage.classList.toggle('hidden', products.length > 0);
+
+    products.forEach(item => {
+      const price = priceOf(item, category.name);
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'detail-product-option';
+
+      const name = document.createElement('span');
+      name.className = 'detail-product-name';
+      name.textContent = item.name;
+
+      const prices = document.createElement('span');
+      prices.className = 'detail-product-prices';
+
+      const current = document.createElement('span');
+      current.className = 'detail-product-price';
+      current.textContent = price == null
+        ? 'Harga belum diisi'
+        : 'Rp' + Math.round(price).toLocaleString('id-ID');
+      prices.appendChild(current);
+
+      if (item.oldPrice && price != null && item.oldPrice > price) {
+        const old = document.createElement('span');
+        old.className = 'old-price';
+        old.textContent = 'Rp' + Math.round(item.oldPrice).toLocaleString('id-ID');
+        prices.appendChild(old);
+      }
+
+      button.append(name, prices);
+
+      if (price == null) {
+        button.disabled = true;
+        button.style.opacity = '.55';
+      } else {
+        button.addEventListener('click', () => {
+          host.querySelectorAll('.detail-product-option').forEach(btn => {
+            btn.classList.remove('selected');
+          });
+          button.classList.add('selected');
+
+          // Gunakan alur pemilihan produk dan ringkasan yang sudah ada.
+          if (typeof chooseProduct === 'function') {
+            chooseProduct(category, item, button);
+          }
+
+          order.classList.remove('hidden');
+          order.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      }
+
+      host.appendChild(button);
+    });
+  }
+
+  document.getElementById('backToCatalog').addEventListener('click', () => {
+    detail.classList.add('hidden');
+    heading.classList.remove('hidden');
+    tabs.classList.remove('hidden');
+    grid.classList.remove('hidden');
+
+    // Kembali ke katalog, bukan tetap di halaman pesanan.
+    order.classList.add('hidden');
+    catalog.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  /*
+   * Ganti tampilan kartu kategori menjadi tombol menuju halaman detail.
+   * Data produk asli di gameCategories tidak diubah.
+   */
+  renderCategories = function () {
+    const query = document.getElementById('searchInput').value
+      .trim().toLocaleLowerCase('id');
+
+    const list = gameCategories.filter(category =>
+      category.group === activeGroup &&
+      category.name.toLocaleLowerCase('id').includes(query)
+    );
+
+    grid.innerHTML = '';
+    empty.classList.toggle('hidden', list.length > 0);
+
+    list.forEach(category => {
+      const card = document.createElement('article');
+      card.className = 'category-card';
+
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'category-button';
+      button.innerHTML = `
+        <div class="category-image-wrap">
+          <img class="category-image" loading="lazy"
+            src="${categoryImage(category.name)}"
+            alt="${escapeHtml(category.name)}"
+            onerror="this.onerror=null;this.src='logolixerastore.jpg'">
+        </div>
+        <div class="category-card-title">
+          <span>${escapeHtml(category.name)}</span>
+          <span class="chevron">→</span>
+        </div>
+      `;
+      button.addEventListener('click', () => openCategory(category));
+      card.appendChild(button);
+      grid.appendChild(card);
+    });
+  };
+
+  // Sembunyikan formulir sampai produk dipilih.
+  order.classList.add('hidden');
+  renderCategories();
+})();
