@@ -1,839 +1,681 @@
 
 "use strict";
 
-const ADMIN_WA = "628818238236";
-const LOGO = "logolixerastore.jpg";
+// =====================================
+// LIXERA STORE - DATA DAN PENGATURAN
+// =====================================
 
-const rupiah = (number) =>
-  new Intl.NumberFormat("id-ID", {
+const ADMIN_WA = "628818238236";
+const STORE_LOGO = "logolixerastore.jpg";
+
+const categories = [
+  { id: "mobile-legends", name: "Mobile Legends", image: "mobilelegends.jpg", group: "Game" },
+  { id: "free-fire", name: "Free Fire", image: "freefire.jpg", group: "Game" },
+  { id: "free-fire-max", name: "Free Fire MAX", image: "freefiremax.jpg", group: "Game" },
+  { id: "pubg-mobile", name: "PUBG Mobile", image: "pubgmobile.jpg", group: "Game" },
+  { id: "honor-of-kings", name: "Honor of Kings", image: "honorofkings.jpg", group: "Game" },
+  { id: "delta-force", name: "Delta Force", image: "deltaforce.jpg", group: "Game" },
+  { id: "valorant", name: "Valorant", image: "valorant.jpg", group: "PC Game" },
+  { id: "league-of-legends", name: "League of Legends", image: "leagueoflegends.jpg", group: "PC Game" },
+  { id: "marvel-rivals", name: "Marvel Rivals", image: "marvelrivals.jpg", group: "PC Game" },
+  { id: "magic-chess", name: "Magic Chess: Go Go", image: "magicchesgogo.jpg", group: "Game" },
+  { id: "afk-journey", name: "AFK Journey", image: "afkjourney.jpg", group: "Game" },
+  { id: "captain-tsubasa", name: "Captain Tsubasa", image: "captaintsubasa.jpg", group: "Game" },
+  { id: "cloud-songs", name: "Cloud Song Saga of Skywalkers", image: "cloudsongsagaofskywalkers.jpg", group: "Game" },
+  { id: "mu-origin", name: "MU Origin", image: "muorigin.jpg", group: "Game" },
+  { id: "pixel-gun", name: "Pixel Gun 3D", image: "pixelgun3d.jpg", group: "Game" },
+  { id: "racing-master", name: "Racing Master", image: "racingmaster.jpg", group: "Game" },
+  { id: "hago", name: "Hago", image: "hago.jpg", group: "Game" },
+  { id: "undawn", name: "Undawn", image: "undawn.jpg", group: "Game" },
+  { id: "mob-rush", name: "Mob Rush", image: "mobrush.jpg", group: "Game" },
+  { id: "fc-mobile", name: "FC Mobile", image: "fcmobile.jpg", group: "Game" },
+  { id: "football-master-2", name: "Football Master 2", image: "footballmaster2.jpg", group: "Game" },
+  { id: "bigolive", name: "BIGO Live", image: "bigolive.jpg", group: "Entertainment" },
+  { id: "likee", name: "Likee", image: "like.jpg", group: "Entertainment" },
+  { id: "lita", name: "Lita", image: "lita.jpg", group: "Entertainment" },
+  { id: "sugo", name: "SUGO", image: "sugo.jpg", group: "Entertainment" },
+  { id: "poppo-live", name: "Poppo Live", image: "poppolive.jpg", group: "Entertainment" },
+  { id: "wetv", name: "WeTV", image: "wetv.jpg", group: "Entertainment" },
+  { id: "vidio", name: "Vidio", image: "vidio.jpg", group: "Entertainment" },
+  { id: "zepeto", name: "ZEPETO", image: "zepeto.jpg", group: "Entertainment" }
+];
+
+// Harga di bawah mengikuti data yang tersedia dari pengguna.
+// Harga dalam rupiah. Jangan mengubah harga tanpa memperbarui data.
+const mobileLegendsProducts = [
+  { name: "5 Diamonds", subcategory: "Diamond", price: 1785 },
+  { name: "10 Diamonds (9 + 1 Bonus)", subcategory: "Diamond", price: 3579 },
+  { name: "12 Diamonds (11 + 1 Bonus)", subcategory: "Diamond", price: 3949 },
+  { name: "19 Diamonds (17 + 2 Bonus)", subcategory: "Diamond", price: 6341 },
+  { name: "28 Diamonds (25 + 3 Bonus)", subcategory: "Diamond", price: 9509 },
+  { name: "28.170 Diamonds (23.431 + 4.739 Bonus)", subcategory: "Diamond", price: 8448106 },
+
+  { name: "Twilight Pass", subcategory: "Pass", price: 169120 },
+  { name: "Weekly Elite Bundle ⚠️ 1x/Minggu", subcategory: "Bundle", price: 17002 },
+  { name: "Monthly Epic Bundle ⚠️ 1x/Bulan", subcategory: "Bundle", price: 84430 },
+  { name: "Weekly Diamond Pass", subcategory: "Weekly Diamond Pass", price: 30198 },
+  { name: "Weekly Diamond Pass x2 🔥 Muraaah", subcategory: "Weekly Diamond Pass", price: 62255 },
+  { name: "Weekly Diamond Pass x3 🔥 Muraaah", subcategory: "Weekly Diamond Pass", price: 94299 }
+];
+
+// Kategori tanpa data harga lengkap memakai jalur tanya harga.
+categories.forEach((category) => {
+  if (category.id === "mobile-legends") {
+    category.products = mobileLegendsProducts;
+  } else {
+    category.products = [{
+      name: "Top Up " + category.name,
+      subcategory: "Top Up",
+      price: null,
+      quoteOnly: true
+    }];
+  }
+});
+
+const customFields = {
+  "mobile-legends": [
+    { name: "userId", label: "User ID", placeholder: "Masukkan User ID", required: true },
+    { name: "zoneId", label: "Zone ID", placeholder: "Masukkan Zone ID", required: true }
+  ],
+  "free-fire": [
+    { name: "userId", label: "Player ID", placeholder: "Masukkan Player ID", required: true }
+  ],
+  "free-fire-max": [
+    { name: "userId", label: "Player ID", placeholder: "Masukkan Player ID", required: true }
+  ],
+  "pubg-mobile": [
+    { name: "userId", label: "Character ID", placeholder: "Masukkan Character ID", required: true }
+  ],
+  "honor-of-kings": [
+    { name: "userId", label: "Player ID", placeholder: "Masukkan Player ID", required: true }
+  ],
+  "delta-force": [
+    { name: "userId", label: "Player ID", placeholder: "Masukkan Player ID", required: true }
+  ],
+  "valorant": [
+    { name: "userId", label: "Riot ID", placeholder: "Contoh: Nama#TAG", required: true },
+    { name: "region", label: "Region", placeholder: "Masukkan region akun", required: true }
+  ],
+  "league-of-legends": [
+    { name: "userId", label: "Riot ID", placeholder: "Contoh: Nama#TAG", required: true },
+    { name: "region", label: "Region", placeholder: "Masukkan region akun", required: true }
+  ],
+  "bigolive": [
+    { name: "userId", label: "BIGO ID", placeholder: "Masukkan BIGO ID", required: true }
+  ],
+  "likee": [
+    { name: "userId", label: "Likee ID", placeholder: "Masukkan Likee ID", required: true }
+  ],
+  "lita": [
+    { name: "userId", label: "User ID", placeholder: "Masukkan User ID", required: true }
+  ],
+  "sugo": [
+    { name: "userId", label: "SUGO ID", placeholder: "Masukkan SUGO ID", required: true }
+  ],
+  "poppo-live": [
+    { name: "userId", label: "Poppo ID", placeholder: "Masukkan Poppo ID", required: true }
+  ],
+  "zepeto": [
+    { name: "userId", label: "ZEPETO ID", placeholder: "Masukkan ZEPETO ID", required: true }
+  ]
+};
+
+// Variabel status website
+let activeGroup = "Semua";
+let activeCategory = null;
+let activeSubcategory = "Semua";
+let selectedProduct = null;
+let toastTimeout = null;
+let pendingOrder = null;
+
+const $ = (selector) => document.querySelector(selector);
+const $$ = (selector) => [...document.querySelectorAll(selector)];
+
+function formatRupiah(amount) {
+  if (amount === null || amount === undefined || !Number.isFinite(Number(amount))) {
+    return "Tanya Harga";
+  }
+
+  return new Intl.NumberFormat("id-ID", {
     style: "currency",
     currency: "IDR",
     maximumFractionDigits: 0
-  }).format(number);
-
-const money = (number) =>
-  "Rp" + new Intl.NumberFormat("id-ID").format(number);
-
-const makeProducts = (items) =>
-  items.map(([name, price, oldPrice]) => ({
-    name,
-    price,
-    oldPrice: oldPrice || null
-  }));
-
-const categories = [
-  {
-    name: "Mobile Legends",
-    group: "Game",
-    image: "mobilelegends.jpg",
-    description: "Diamond & Weekly Pass",
-    fields: [
-      { label: "User ID", placeholder: "Contoh: 123456789", required: true },
-      { label: "Server / Zone ID", placeholder: "Contoh: 1234", required: true }
-    ],
-    products: makeProducts([
-      ["5 Diamonds", 1785],
-      ["10 Diamonds (9+1)", 3579],
-      ["12 Diamonds (11+1)", 3949],
-      ["19 Diamonds (17+2)", 6341],
-      ["28 Diamonds (25+3)", 9509],
-      ["44 Diamonds (40+4)", 13753],
-      ["54 Diamonds (50+4)", 16350],
-      ["71 Diamonds (64+7)", 22165],
-      ["74 Diamonds (67+7)", 23250],
-      ["85 Diamonds (77+8)", 26218],
-      ["88 Diamonds (80+8)", 27306],
-      ["110 Diamonds (100+10)", 32945],
-      ["113 Diamonds (102+11)", 35144],
-      ["128 Diamonds (117+11)", 42385],
-      ["148 Diamonds (134+14)", 48616],
-      ["170 Diamonds (154+16)", 51863],
-      ["176 Diamonds (160+16)", 57984],
-      ["184 Diamonds (167+17)", 61576],
-      ["222 Diamonds (200+22)", 74198],
-      ["240 Diamonds (217+23)", 75016],
-      ["258 Diamonds (233+25)", 86204],
-      ["277 Diamonds (250+27)", 85657],
-      ["296 Diamonds", 90132],
-      ["301 Diamonds", 94486],
-      ["305 Diamonds", 100630],
-      ["333 Diamonds", 103880],
-      ["346 Diamonds", 102127],
-      ["356 Diamonds", 111487],
-      ["370 Diamonds", 113183],
-      ["384 Diamonds", 116898],
-      ["408 Diamonds", 123698],
-      ["424 Diamonds", 130000],
-      ["452 Diamonds", 147108],
-      ["518 Diamonds", 169376],
-      ["568 Diamonds", 182853],
-      ["601 Diamonds", 192464],
-      ["642 Diamonds", 207000],
-      ["716 Diamonds", 229957],
-      ["758 Diamonds", 244565],
-      ["790 Diamonds", 255639],
-      ["845 Diamonds", 272849],
-      ["875 Diamonds", 279442],
-      ["938 Diamonds", 299998],
-      ["966 Diamonds", 309624],
-      ["1045 Diamonds", 311799],
-      ["1136 Diamonds", 363000],
-      ["1159 Diamonds", 371996],
-      ["1443 Diamonds", 460683],
-      ["1506 Diamonds", 481239],
-      ["1704 Diamonds", 544523],
-      ["2010 Diamonds", 561429],
-      ["2232 Diamonds", 689551],
-      ["2380 Diamonds", 732449],
-      ["2578 Diamonds", 796794],
-      ["2625 Diamonds", 811951],
-      ["3453 Diamonds", 1076536]
-    ])
-  },
-  {
-    name: "Free Fire",
-    group: "Game",
-    image: "freefire.jpg",
-    description: "Diamond & Membership",
-    fields: [
-      { label: "Player ID", placeholder: "Masukkan Player ID", required: true }
-    ],
-    products: makeProducts([
-      ["5 Diamonds", 884, 1000],
-      ["10 Diamonds", 1762, 2000],
-      ["20 Diamonds", 3518, 4000],
-      ["50 Diamonds", 7150, 8000],
-      ["70 Diamonds", 9150, 10000],
-      ["140 Diamonds", 18350, 20000],
-      ["12 Diamonds", 1870, 2200],
-      ["25 Diamonds", 4897, 5000],
-      ["30 Diamonds", 5561, 6000],
-      ["55 Diamonds", 7860, 9000],
-      ["80 Diamonds", 11754, 12000],
-      ["100 Diamonds", 13980, 17600],
-      ["120 Diamonds", 17632, 18000],
-      ["130 Diamonds", 18791, 19000],
-      ["145 Diamonds", 20567, 21000],
-      ["150 Diamonds", 21549, 22000],
-      ["190 Diamonds", 27426, 28000],
-      ["200 Diamonds", 29385, 30000],
-      ["210 Diamonds", 29826, 30000],
-      ["280 Diamonds", 39179, 40000],
-      ["355 Diamonds", 46850, 50000],
-      ["420 Diamonds", 57866, 59000]
-    ])
-  },
-  {
-    name: "Free Fire MAX",
-    group: "Game",
-    image: "freefiremax.jpg",
-    description: "Diamond",
-    fields: [
-      { label: "Player ID", placeholder: "Masukkan Player ID", required: true }
-    ],
-    products: []
-  },
-  {
-    name: "Magic Chess GoGo",
-    group: "Game",
-    image: "magicchesgogo.jpg",
-    description: "Top up game",
-    fields: [
-      { label: "User ID", placeholder: "Masukkan User ID", required: true },
-      { label: "Server / Zone ID", placeholder: "Jika diperlukan", required: false }
-    ],
-    products: []
-  },
-  {
-    name: "PUBG Mobile",
-    group: "Game",
-    image: "pubgmobile.jpg",
-    description: "UC",
-    fields: [
-      { label: "Player ID", placeholder: "Masukkan Character ID", required: true }
-    ],
-    products: []
-  },
-  {
-    name: "FC Mobile",
-    group: "Game",
-    image: "fcmobile.jpg",
-    description: "FC Points",
-    fields: [
-      { label: "User ID", placeholder: "Masukkan User ID", required: true }
-    ],
-    products: []
-  },
-  {
-    name: "Honor of Kings",
-    group: "Game",
-    image: "honorofkings.jpg",
-    description: "Token",
-    fields: [
-      { label: "Player ID", placeholder: "Masukkan Player ID", required: true }
-    ],
-    products: []
-  },
-  {
-    name: "Football Master 2",
-    group: "Game",
-    image: "footballmaster2.jpg",
-    description: "Item game",
-    fields: [
-      { label: "User ID", placeholder: "Masukkan User ID", required: true }
-    ],
-    products: []
-  },
-  {
-    name: "Delta Force",
-    group: "Game",
-    image: "deltaforce.jpg",
-    description: "Top up game",
-    fields: [
-      { label: "Player ID", placeholder: "Masukkan Player ID", required: true }
-    ],
-    products: []
-  },
-  {
-    name: "ZEPETO",
-    group: "Game",
-    image: "zepeto.jpg",
-    description: "ZEM & Coin",
-    fields: [
-      { label: "ZEPETO ID", placeholder: "Masukkan ID akun", required: true }
-    ],
-    products: []
-  },
-  {
-    name: "Undawn",
-    group: "Game",
-    image: "undawn.jpg",
-    description: "Top up game",
-    fields: [
-      { label: "Character ID", placeholder: "Masukkan Character ID", required: true },
-      { label: "Server", placeholder: "Masukkan server", required: false }
-    ],
-    products: []
-  },
-  {
-    name: "Call of Duty Mobile",
-    group: "Game",
-    image: "callofduty.jpg",
-    description: "CP",
-    fields: [
-      { label: "Player UID", placeholder: "Masukkan Player UID", required: true }
-    ],
-    products: []
-  },
-  {
-    name: "Arena of Valor",
-    group: "Game",
-    image: "arenaofvalor.jpg",
-    description: "Voucher",
-    fields: [
-      { label: "Player ID", placeholder: "Masukkan Player ID", required: true }
-    ],
-    products: []
-  },
-  {
-    name: "AFK Journey",
-    group: "Game",
-    image: "afkjourney.jpg",
-    description: "Dragon Crystals",
-    fields: [
-      { label: "Player ID", placeholder: "Masukkan Player ID", required: true },
-      { label: "Server", placeholder: "Masukkan server", required: false }
-    ],
-    products: []
-  },
-  {
-    name: "Cloud Song: Saga of Skywalkers",
-    group: "Game",
-    image: "cloudsongsagaofskywalkers.jpg",
-    description: "Top up game",
-    fields: [
-      { label: "Character ID", placeholder: "Masukkan Character ID", required: true },
-      { label: "Server", placeholder: "Masukkan server", required: false }
-    ],
-    products: []
-  },
-  {
-    name: "Mob Rush",
-    group: "Game",
-    image: "mobrush.jpg",
-    description: "Top up game",
-    fields: [
-      { label: "Player ID", placeholder: "Masukkan Player ID", required: true }
-    ],
-    products: []
-  },
-  {
-    name: "HAGO",
-    group: "Game",
-    image: "hago.jpg",
-    description: "Koin HAGO",
-    fields: [
-      { label: "User ID", placeholder: "Masukkan User ID", required: true }
-    ],
-    products: []
-  },
-  {
-    name: "Pixel Gun 3D",
-    group: "Game",
-    image: "pixelgun3d.jpg",
-    description: "Gems & Coins",
-    fields: [
-      { label: "Player ID", placeholder: "Masukkan Player ID", required: true }
-    ],
-    products: []
-  },
-  {
-    name: "Captain Tsubasa: Ace",
-    group: "Game",
-    image: "captaintsubasa.jpg",
-    description: "Top up game",
-    fields: [
-      { label: "Player ID", placeholder: "Masukkan Player ID", required: true }
-    ],
-    products: []
-  },
-  {
-    name: "Racing Master",
-    group: "Game",
-    image: "racingmaster.jpg",
-    description: "Top up game",
-    fields: [
-      { label: "Player ID", placeholder: "Masukkan Player ID", required: true }
-    ],
-    products: []
-  },
-  {
-    name: "MU Origin 2",
-    group: "Game",
-    image: "muorigin.jpg",
-    description: "Diamond",
-    fields: [
-      { label: "Character ID", placeholder: "Masukkan Character ID", required: true },
-      { label: "Server", placeholder: "Masukkan server", required: false }
-    ],
-    products: []
-  },
-  {
-    name: "VALORANT",
-    group: "PC Game",
-    image: "valorant.jpg",
-    description: "VP",
-    fields: [
-      { label: "Riot ID", placeholder: "Nama pemain#TAG", required: true },
-      { label: "Region", placeholder: "Contoh: AP", required: true }
-    ],
-    products: []
-  },
-  {
-    name: "League of Legends PC",
-    group: "PC Game",
-    image: "leagueoflegends.jpg",
-    description: "RP",
-    fields: [
-      { label: "Riot ID", placeholder: "Nama pemain#TAG", required: true },
-      { label: "Region", placeholder: "Masukkan region", required: true }
-    ],
-    products: []
-  },
-  {
-    name: "Marvel Rivals",
-    group: "PC Game",
-    image: "marvelrivals.jpg",
-    description: "Lattice",
-    fields: [
-      { label: "Player ID", placeholder: "Masukkan Player ID", required: true }
-    ],
-    products: []
-  },
-  {
-    name: "Vidio",
-    group: "Entertainment",
-    image: "vidio.jpg",
-    description: "Paket berlangganan",
-    fields: [
-      { label: "Email / nomor akun Vidio", placeholder: "Email atau nomor terdaftar", required: true }
-    ],
-    products: []
-  },
-  {
-    name: "Poppo Live",
-    group: "Entertainment",
-    image: "poppolive.jpg",
-    description: "Koin Poppo",
-    fields: [
-      { label: "User ID", placeholder: "Masukkan User ID", required: true }
-    ],
-    products: []
-  },
-  {
-    name: "BIGO LIVE",
-    group: "Entertainment",
-    image: "bigolive.jpg",
-    description: "Beans & Diamonds",
-    fields: [
-      { label: "BIGO ID", placeholder: "Masukkan BIGO ID", required: true }
-    ],
-    products: []
-  },
-  {
-    name: "LIKE",
-    group: "Entertainment",
-    image: "like.jpg",
-    description: "Koin LIKE",
-    fields: [
-      { label: "User ID", placeholder: "Masukkan User ID", required: true }
-    ],
-    products: []
-  },
-  {
-    name: "WeTV",
-    group: "Entertainment",
-    image: "wetv.jpg",
-    description: "VIP",
-    fields: [
-      { label: "Email / nomor akun WeTV", placeholder: "Email atau nomor terdaftar", required: true }
-    ],
-    products: []
-  },
-  {
-    name: "LITA",
-    group: "Entertainment",
-    image: "lita.jpg",
-    description: "Koin LITA",
-    fields: [
-      { label: "User ID", placeholder: "Masukkan User ID", required: true }
-    ],
-    products: []
-  },
-  {
-    name: "SUGO",
-    group: "Entertainment",
-    image: "sugo.jpg",
-    description: "Koin SUGO",
-    fields: [
-      { label: "User ID", placeholder: "Masukkan User ID", required: true }
-    ],
-    products: []
-  }
-];
-    
-const categoryGrid = document.getElementById("categoryGrid");
-const categoryTabs = document.getElementById("categoryTabs");
-const searchInput = document.getElementById("searchInput");
-const emptyState = document.getElementById("emptyState");
-const orderSection = document.getElementById("pesanan");
-const orderForm = document.getElementById("orderForm");
-const gameFields = document.getElementById("gameFields");
-const paymentModal = document.getElementById("paymentModal");
-
-let activeGroup = "Game";
-let openedCategory = null;
-let selected = null;
-let selectedCategory = null;
-let selectedImage = LOGO;
-let lastOrderMessage = "";
-
-function getFinalPrice(product, categoryName) {
-  if (typeof product.price !== "number") return null;
-  if (categoryName === "Mobile Legends") return product.price;
-  return product.price + 200;
+  }).format(Number(amount));
 }
 
-function getOldPrice(product, categoryName) {
-  if (categoryName === "Mobile Legends") return null;
-  const finalPrice = getFinalPrice(product, categoryName);
-  if (product.oldPrice && finalPrice !== null && product.oldPrice > finalPrice) {
-    return product.oldPrice;
-  }
-  return null;
+function getCategoryById(id) {
+  return categories.find((category) => category.id === id) || null;
 }
 
-function applyImageFallback(img) {
-  img.addEventListener("error", () => {
-    if (!img.dataset.fallbackUsed) {
-      img.dataset.fallbackUsed = "true";
-      img.src = LOGO;
+function getProductPriceLabel(product) {
+  return product.price == null ? "Tanya Harga via WhatsApp" : formatRupiah(product.price);
     }
-  });
-}
 
-function hideOrderDetails() {
-  orderSection.classList.add("hidden");
-  selected = null;
-  selectedCategory = null;
-  selectedImage = LOGO;
-
-  document.getElementById("summaryEmpty").classList.remove("hidden");
-  document.getElementById("summaryDetails").classList.add("hidden");
-
-  gameFields.innerHTML =
-    '<p class="field-hint">Pilih nominal terlebih dahulu untuk mengisi detail produk.</p>';
-
-  categoryGrid.querySelectorAll(".product-option.selected").forEach((button) => {
-    button.classList.remove("selected");
-  });
-}
+// =====================================
+// RENDER KATEGORI DAN PENCARIAN
+// =====================================
 
 function renderCategories() {
-  const query = searchInput.value.trim().toLowerCase();
+  const grid = $("#categoryGrid");
+  const emptyState = $("#emptyState");
+  if (!grid) return;
 
-  const filtered = categories.filter((category) => {
-    return category.group === activeGroup &&
-      (!query || category.name.toLowerCase().includes(query));
+  const keyword = ($("#searchInput")?.value || "").trim().toLowerCase();
+
+  const visibleCategories = categories.filter((category) => {
+    const matchGroup = activeGroup === "Semua" || category.group === activeGroup;
+    const matchSearch = category.name.toLowerCase().includes(keyword);
+    return matchGroup && matchSearch;
   });
 
-  categoryGrid.innerHTML = "";
-  emptyState.classList.toggle("hidden", filtered.length > 0);
+  grid.innerHTML = "";
 
-  filtered.forEach((category) => {
-    const card = document.createElement("article");
+  visibleCategories.forEach((category) => {
+    const card = document.createElement("button");
+    card.type = "button";
     card.className = "category-card";
+    card.innerHTML = `
+      <img src="${category.image}" alt="${category.name}" loading="lazy">
+      <div class="category-card-copy">
+        <h3>${category.name}</h3>
+        <p>${category.group}</p>
+        <span class="card-link">Lihat Produk ↗</span>
+      </div>
+    `;
 
-    if (openedCategory === category.name) {
-      card.classList.add("expanded");
-    }
+    card.addEventListener("click", () => openCategoryPage(category.id));
 
-    const trigger = document.createElement("button");
-    trigger.type = "button";
-    trigger.className = "category-trigger";
-    trigger.setAttribute("aria-expanded", String(openedCategory === category.name));
+    const image = card.querySelector("img");
+    image.addEventListener("error", () => {
+      image.src = STORE_LOGO;
+    }, { once: true });
 
-    const image = document.createElement("img");
-    image.className = "category-image";
-    image.src = category.image;
-    image.alt = category.name;
-    applyImageFallback(image);
-
-    const info = document.createElement("div");
-    info.className = "category-info";
-
-    const title = document.createElement("h3");
-    title.textContent = category.name;
-
-    const description = document.createElement("p");
-    description.textContent = category.description;
-
-    const chevron = document.createElement("span");
-    chevron.className = "category-chevron";
-    chevron.textContent = openedCategory === category.name ? "⌃" : "⌄";
-
-    info.append(title, description);
-    trigger.append(image, info, chevron);
-
-    trigger.addEventListener("click", () => {
-      hideOrderDetails();
-      openedCategory = openedCategory === category.name ? null : category.name;
-      renderCategories();
-    });
-
-    card.appendChild(trigger);
-
-    if (openedCategory === category.name) {
-      card.appendChild(renderProductPanel(category));
-    }
-
-    categoryGrid.appendChild(card);
+    grid.appendChild(card);
   });
+
+  emptyState?.classList.toggle("hidden", visibleCategories.length > 0);
 }
 
-function renderProductPanel(category) {
-  const panel = document.createElement("div");
-  panel.className = "product-panel";
+function setActiveGroup(group) {
+  activeGroup = group;
 
-  const heading = document.createElement("div");
-  heading.className = "product-panel-heading";
+  $$(".tab-button").forEach((button) => {
+    button.classList.toggle("active", button.dataset.group === group);
+  });
 
-  const headingText = document.createElement("span");
-  headingText.textContent = "Pilih nominal";
+  renderCategories();
+}
 
-  const helper = document.createElement("small");
-  helper.textContent = category.products.length
-    ? `${category.products.length} pilihan`
-    : "Harga melalui admin";
+function openCategoryPage(categoryId) {
+  const category = getCategoryById(categoryId);
+  if (!category) return;
 
-  heading.append(headingText, helper);
-  panel.appendChild(heading);
+  activeCategory = category;
+  activeSubcategory = "Semua";
+  selectedProduct = null;
 
-  if (!category.products.length) {
-    const notice = document.createElement("p");
-    notice.className = "field-hint";
-    notice.textContent =
-      "Daftar harga kategori ini belum dimasukkan. Hubungi admin untuk harga terbaru.";
-    notice.style.color = "var(--muted)";
-    notice.style.fontSize = "11px";
-    panel.appendChild(notice);
+  $("#categoryGrid")?.classList.add("hidden");
+  $("#categoryTabs")?.classList.add("hidden");
+  $("#mainSearchBox")?.classList.add("hidden");
+  $("#emptyState")?.classList.add("hidden");
 
-    const contact = document.createElement("a");
-    contact.className = "primary-button";
-    contact.href = `https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(
-      `Halo admin Lixera Store, saya ingin tanya harga ${category.name}.`
-    )}`;
-    contact.target = "_blank";
-    contact.rel = "noopener";
-    contact.textContent = "Tanya Harga via WhatsApp ↗";
-    panel.appendChild(contact);
+  $("#categoryPageTitle").textContent = category.name;
+  $("#categoryPage")?.classList.remove("hidden");
+  $("#pesanan")?.classList.add("hidden");
 
-    return panel;
-  }
+  renderSubcategoryFilters();
+  renderProducts();
 
-  const list = document.createElement("div");
-  list.className = "product-list";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
 
-  category.products.forEach((product) => {
-    const finalPrice = getFinalPrice(product, category.name);
-    const oldPrice = getOldPrice(product, category.name);
+function returnToCategories() {
+  activeCategory = null;
+  activeSubcategory = "Semua";
+  selectedProduct = null;
 
+  $("#categoryPage")?.classList.add("hidden");
+  $("#pesanan")?.classList.add("hidden");
+  $("#categoryGrid")?.classList.remove("hidden");
+  $("#categoryTabs")?.classList.remove("hidden");
+  $("#mainSearchBox")?.classList.remove("hidden");
+
+  renderCategories();
+  window.scrollTo({ top: $("#kategori")?.offsetTop || 0, behavior: "smooth" });
+}
+
+function renderSubcategoryFilters() {
+  const container = $("#subcategoryFilters");
+  if (!container || !activeCategory) return;
+
+  const names = [
+    "Semua",
+    ...new Set((activeCategory.products || []).map((product) => product.subcategory || "Lainnya"))
+  ];
+
+  container.innerHTML = "";
+
+  names.forEach((name) => {
     const button = document.createElement("button");
     button.type = "button";
-    button.className = "product-option";
+    button.className = "subcategory-filter";
+    button.textContent = name;
 
-    const productName = document.createElement("span");
-    productName.className = "product-name";
-    productName.textContent = product.name;
-
-    const prices = document.createElement("span");
-    prices.className = "product-prices";
-
-    const price = document.createElement("span");
-    price.className = "product-price";
-    price.textContent = money(finalPrice);
-    prices.appendChild(price);
-
-    if (oldPrice) {
-      const old = document.createElement("span");
-      old.className = "product-old-price";
-      old.textContent = money(oldPrice);
-      prices.appendChild(old);
+    if (name === activeSubcategory) {
+      button.classList.add("active");
     }
 
-    button.append(productName, prices);
-    button.addEventListener("click", () => chooseProduct(category, product, button));
-    list.appendChild(button);
-  });
+    button.addEventListener("click", () => {
+      activeSubcategory = name;
+      renderSubcategoryFilters();
+      renderProducts();
+    });
 
-  panel.appendChild(list);
-  return panel;
+    container.appendChild(button);
+  });
 }
 
-function chooseProduct(category, product, button) {
-  const finalPrice = getFinalPrice(product, category.name);
+function renderProducts() {
+  const grid = $("#categoryProductGrid");
+  const emptyState = $("#categoryEmptyState");
+  if (!grid || !activeCategory) return;
 
-  if (finalPrice === null) {
-    showToast("Harga produk ini belum tersedia. Silakan hubungi admin.");
-    return;
-  }
+  const products = activeCategory.products || [];
+  const visibleProducts = activeSubcategory === "Semua"
+    ? products
+    : products.filter((product) => (product.subcategory || "Lainnya") === activeSubcategory);
 
-  selected = { ...product, finalPrice };
-  selectedCategory = category.name;
-  selectedImage = category.image;
+  grid.innerHTML = "";
 
-  categoryGrid.querySelectorAll(".product-option").forEach((item) => {
-    item.classList.remove("selected");
+  visibleProducts.forEach((product) => {
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = "product-card";
+
+    if (selectedProduct === product) {
+      card.classList.add("selected");
+    }
+
+    const priceLabel = getProductPriceLabel(product);
+    const originalPrice = product.originalPrice;
+
+    card.innerHTML = `
+      <div>
+        <span class="product-type">${product.subcategory || "Produk"}</span>
+        <h3></h3>
+      </div>
+      <div class="product-price">
+        <span class="current-price"></span>
+        ${originalPrice && originalPrice > product.price
+          ? `<del class="product-original">${formatRupiah(originalPrice)}</del>`
+          : ""}
+      </div>
+      <span class="product-action">Pilih Produk →</span>
+    `;
+
+    card.querySelector("h3").textContent = product.name;
+    card.querySelector(".current-price").textContent = priceLabel;
+
+    card.addEventListener("click", () => chooseProduct(product, activeCategory));
+    grid.appendChild(card);
   });
-  button.classList.add("selected");
 
-  document.getElementById("summaryEmpty").classList.add("hidden");
-  document.getElementById("summaryDetails").classList.remove("hidden");
+  emptyState?.classList.toggle("hidden", visibleProducts.length > 0);
+                   }
 
-  const summaryImage = document.getElementById("summaryImage");
-  summaryImage.src = selectedImage;
-  summaryImage.alt = category.name;
-  applyImageFallback(summaryImage);
+// =====================================
+// PILIH PRODUK DAN FORM KHUSUS KATEGORI
+// =====================================
 
-  document.getElementById("summaryProduct").textContent = product.name;
-  document.getElementById("summaryCategory").textContent = category.name;
-  document.getElementById("summaryPrice").textContent = rupiah(finalPrice);
-  document.getElementById("summaryTotal").textContent = rupiah(finalPrice);
+function chooseProduct(product, category) {
+  selectedProduct = product;
+  activeCategory = category;
 
-  renderGameFields(category);
-  orderSection.classList.remove("hidden");
+  renderProducts();
+  renderOrderFields();
+  updateOrderSummary();
+
+  $("#pesanan")?.classList.remove("hidden");
 
   window.setTimeout(() => {
-    orderSection.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, 60);
+    $("#pesanan")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, 80);
 }
 
-function renderGameFields(category) {
-  gameFields.innerHTML = "";
+function renderOrderFields() {
+  const container = $("#gameFields");
+  if (!container || !activeCategory) return;
 
-  category.fields.forEach((field, index) => {
-    const label = document.createElement("label");
-    label.className = "form-label";
-    label.htmlFor = `productField${index}`;
+  container.innerHTML = "";
 
-    label.append(document.createTextNode(field.label));
-
-    if (field.required) {
-      const required = document.createElement("span");
-      required.textContent = " *";
-      label.appendChild(required);
+  const fields = customFields[activeCategory.id] || [
+    {
+      name: "userId",
+      label: "ID / Nomor Akun",
+      placeholder: "Masukkan ID atau nomor akun",
+      required: true
     }
+  ];
+
+  const heading = document.createElement("h3");
+  heading.textContent = "Data " + activeCategory.name;
+  heading.style.marginTop = "25px";
+  container.appendChild(heading);
+
+  fields.forEach((field) => {
+    const label = document.createElement("label");
+    label.htmlFor = "gameField_" + field.name;
+    label.textContent = field.label;
 
     const input = document.createElement("input");
-    input.id = `productField${index}`;
-    input.name = `productField${index}`;
+    input.id = "gameField_" + field.name;
+    input.name = field.name;
     input.type = "text";
-    input.placeholder = field.placeholder || `Masukkan ${field.label}`;
+    input.placeholder = field.placeholder;
     input.required = Boolean(field.required);
     input.autocomplete = "off";
-    input.maxLength = 100;
 
-    label.appendChild(input);
-    gameFields.appendChild(label);
+    container.appendChild(label);
+    container.appendChild(input);
   });
+
+  const hint = document.createElement("small");
+  hint.className = "game-field-hint";
+  hint.textContent = activeCategory.id === "mobile-legends"
+    ? "Pastikan User ID dan Zone ID benar."
+    : "Pastikan data akun sesuai dengan instruksi game atau layanan.";
+  container.appendChild(hint);
 }
 
-categoryTabs.querySelectorAll(".category-tab").forEach((tab) => {
-  tab.addEventListener("click", () => {
-    activeGroup = tab.dataset.group;
-    openedCategory = null;
-    hideOrderDetails();
-
-    categoryTabs.querySelectorAll(".category-tab").forEach((item) => {
-      item.classList.toggle("active", item === tab);
-    });
-
-    renderCategories();
-  });
-});
-
-searchInput.addEventListener("input", () => {
-  openedCategory = null;
-  hideOrderDetails();
-  renderCategories();
-});
-
-document.getElementById("changeProduct").addEventListener("click", () => {
-  hideOrderDetails();
-  document.getElementById("katalog").scrollIntoView({
-    behavior: "smooth",
-    block: "start"
-  });
-});
-
-orderForm.addEventListener("submit", (event) => {
-  event.preventDefault();
-
-  if (!selected || !selectedCategory) {
-    showToast("Pilih produk terlebih dahulu.");
+function updateOrderSummary() {
+  if (!selectedProduct || !activeCategory) {
+    $("#summaryEmpty")?.classList.remove("hidden");
+    $("#summaryDetails")?.classList.add("hidden");
     return;
   }
 
-  if (!orderForm.reportValidity()) return;
+  $("#summaryEmpty")?.classList.add("hidden");
+  $("#summaryDetails")?.classList.remove("hidden");
 
-  const buyerName = document.getElementById("buyerName").value.trim();
-  const buyerContact = document.getElementById("buyerContact").value.trim();
-  const buyerNote = document.getElementById("buyerNote").value.trim();
+  $("#summaryImage").src = activeCategory.image;
+  $("#summaryImage").onerror = () => {
+    $("#summaryImage").src = STORE_LOGO;
+  };
 
-  const detailLines = [];
-  const category = categories.find((item) => item.name === selectedCategory);
+  $("#summaryCategory").textContent = activeCategory.name;
+  $("#summaryProduct").textContent = selectedProduct.name;
 
-  if (category) {
-    category.fields.forEach((field, index) => {
-      const input = document.getElementById(`productField${index}`);
-
-      if (input && input.value.trim()) {
-        detailLines.push(`${field.label}: ${input.value.trim()}`);
-      }
-    });
-  }
-
-  lastOrderMessage = [
-    "HALO ADMIN LIXERA STORE, SAYA INGIN KONFIRMASI PESANAN.",
-    "",
-    "Nama pemesan: " + buyerName,
-    "Kategori: " + selectedCategory,
-    "Produk: " + selected.name,
-    ...detailLines,
-    "Kontak: " + (buyerContact || "-"),
-    "Catatan: " + (buyerNote || "-"),
-    "",
-    "Total: " + rupiah(selected.finalPrice),
-    "",
-    "Saya akan melakukan pembayaran melalui QRIS. Mohon bantu cek pesanan saya."
-  ].join("\n");
-
-  document.getElementById("paymentTotal").textContent = rupiah(selected.finalPrice);
-  paymentModal.classList.remove("hidden");
-  document.body.classList.add("modal-open");
-});
-
-function closePaymentModal() {
-  paymentModal.classList.add("hidden");
-  document.body.classList.remove("modal-open");
+  const priceText = getProductPriceLabel(selectedProduct);
+  $("#summaryPrice").textContent = priceText;
+  $("#summaryTotal").textContent = priceText;
 }
 
-document.getElementById("closePayment").addEventListener("click", closePaymentModal);
+function changeSelectedProduct() {
+  if (!activeCategory) return;
 
-paymentModal.addEventListener("click", (event) => {
-  if (event.target === paymentModal) {
-    closePaymentModal();
+  $("#pesanan")?.classList.add("hidden");
+  $("#categoryPage")?.classList.remove("hidden");
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function collectGameFieldValues() {
+  const values = [];
+
+  $$("#gameFields input").forEach((input) => {
+    const label = $(`label[for="${input.id}"]`);
+    values.push({
+      label: label ? label.textContent : input.name,
+      value: input.value.trim()
+    });
+  });
+
+  return values;
+}
+
+// =====================================
+// PESANAN, PEMBAYARAN, DAN WHATSAPP
+// =====================================
+
+function buildOrderMessage() {
+  if (!selectedProduct || !activeCategory) return "";
+
+  const buyerName = $("#buyerName").value.trim();
+  const buyerContact = $("#buyerContact").value.trim();
+  const buyerNote = $("#buyerNote").value.trim();
+  const gameValues = collectGameFieldValues();
+
+  const lines = [
+    "Halo Admin LIXERA STORE, saya ingin memesan:",
+    "",
+    "Kategori: " + activeCategory.name,
+    "Produk: " + selectedProduct.name,
+    "Harga: " + getProductPriceLabel(selectedProduct),
+    "Nama pembeli: " + buyerName,
+    "Nomor WhatsApp: " + buyerContact
+  ];
+
+  gameValues.forEach((field) => {
+    lines.push(field.label + ": " + field.value);
+  });
+
+  if (buyerNote) {
+    lines.push("Catatan: " + buyerNote);
   }
-});
 
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && !paymentModal.classList.contains("hidden")) {
-    closePaymentModal();
-  }
-});
-
-document.getElementById("confirmWhatsApp").addEventListener("click", () => {
-  if (!lastOrderMessage) {
-    showToast("Isi detail pesanan terlebih dahulu.");
-    return;
+  if (selectedProduct.price == null) {
+    lines.push("", "Mohon informasikan harga produk ini terlebih dahulu.");
   }
 
-  const url = `https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(lastOrderMessage)}`;
+  lines.push("", "Mohon konfirmasi pesanan saya. Terima kasih.");
+  return lines.join("\n");
+}
+
+function openWhatsApp(message) {
+  const url = "https://wa.me/" + ADMIN_WA + "?text=" + encodeURIComponent(message);
   window.open(url, "_blank", "noopener,noreferrer");
-});
-
-let toastTimeout;
+}
 
 function showToast(message) {
-  const toast = document.getElementById("toast");
+  const toast = $("#toast");
+  if (!toast) return;
+
   toast.textContent = message;
   toast.classList.remove("hidden");
 
   window.clearTimeout(toastTimeout);
   toastTimeout = window.setTimeout(() => {
     toast.classList.add("hidden");
-  }, 3200);
+  }, 3000);
 }
 
-document.querySelectorAll(".banner-dot").forEach((dot) => {
-  dot.addEventListener("click", () => {
-    const banner = document.getElementById("heroBanner");
-    banner.src = dot.dataset.banner;
-    banner.dataset.fallbackUsed = "";
+function openPaymentModal() {
+  if (!selectedProduct) {
+    showToast("Pilih produk terlebih dahulu.");
+    return;
+  }
 
-    document.querySelectorAll(".banner-dot").forEach((item) => {
-      item.classList.toggle("active", item === dot);
-    });
+  if (selectedProduct.price == null) {
+    openWhatsApp(buildOrderMessage());
+    showToast("Silakan tanyakan harga kepada admin melalui WhatsApp.");
+    return;
+  }
+
+  pendingOrder = buildOrderMessage();
+  $("#paymentTotal").textContent = formatRupiah(selectedProduct.price);
+  $("#paymentModal")?.classList.remove("hidden");
+  document.body.classList.add("no-scroll");
+}
+
+function closePaymentModal() {
+  $("#paymentModal")?.classList.add("hidden");
+  document.body.classList.remove("no-scroll");
+}
+
+function handleOrderSubmit(event) {
+  event.preventDefault();
+
+  if (!selectedProduct || !activeCategory) {
+    showToast("Pilih kategori dan produk terlebih dahulu.");
+    return;
+  }
+
+  const message = buildOrderMessage();
+
+  if (selectedProduct.price == null) {
+    openWhatsApp(message);
+    showToast("Lanjutkan pertanyaan harga melalui WhatsApp.");
+    return;
+  }
+
+  pendingOrder = message;
+  openPaymentModal();
+}
+
+// Event form pesanan
+$("#orderForm")?.addEventListener("submit", handleOrderSubmit);
+
+$("#changeProduct")?.addEventListener("click", changeSelectedProduct);
+
+$("#closePayment")?.addEventListener("click", closePaymentModal);
+$("#cancelPayment")?.addEventListener("click", closePaymentModal);
+
+$("#paymentModal")?.addEventListener("click", (event) => {
+  if (event.target.id === "paymentModal") {
+    closePaymentModal();
+  }
+});
+
+$("#confirmWhatsApp")?.addEventListener("click", () => {
+  if (!pendingOrder) {
+    showToast("Data pesanan belum tersedia.");
+    return;
+  }
+
+  openWhatsApp(
+    pendingOrder +
+    "\n\nSaya akan melakukan pembayaran setelah mendapat konfirmasi admin."
+  );
+
+  closePaymentModal();
+});
+    
+// =====================================
+// NAVIGASI, BANNER, DAN INISIALISASI
+// =====================================
+
+// Tombol kembali dari halaman kategori
+$("#backToCategories")?.addEventListener("click", returnToCategories);
+
+// Filter kategori utama
+$$(".tab-button").forEach((button) => {
+  button.addEventListener("click", () => {
+    setActiveGroup(button.dataset.group);
   });
 });
 
-const menuToggle = document.getElementById("menuToggle");
-const mainNav = document.getElementById("mainNav");
+// Pencarian kategori
+$("#searchInput")?.addEventListener("input", renderCategories);
 
-menuToggle.addEventListener("click", () => {
-  const isOpen = mainNav.classList.toggle("open");
-  menuToggle.setAttribute("aria-expanded", String(isOpen));
-  menuToggle.textContent = isOpen ? "×" : "☰";
+// Tombol menu mobile
+$("#menuToggle")?.addEventListener("click", () => {
+  const nav = $("#mainNav");
+  const isOpen = nav?.classList.toggle("open");
+
+  $("#menuToggle").setAttribute("aria-expanded", String(Boolean(isOpen)));
 });
 
-mainNav.querySelectorAll("a").forEach((link) => {
+// Tutup menu HP setelah link dipilih
+$$(".main-nav a").forEach((link) => {
   link.addEventListener("click", () => {
-    mainNav.classList.remove("open");
-    menuToggle.setAttribute("aria-expanded", "false");
-    menuToggle.textContent = "☰";
+    $("#mainNav")?.classList.remove("open");
+    $("#menuToggle")?.setAttribute("aria-expanded", "false");
   });
 });
 
-document.getElementById("currentYear").textContent = new Date().getFullYear();
+// Link kembali ke beranda
+function goHome() {
+  returnToCategories();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
 
+$("#homeLink")?.addEventListener("click", (event) => {
+  event.preventDefault();
+  goHome();
+});
+
+$("#footerHomeLink")?.addEventListener("click", (event) => {
+  event.preventDefault();
+  goHome();
+});
+
+$("#exploreButton")?.addEventListener("click", () => {
+  returnToCategories();
+});
+
+// Navigasi ke bagian website
+$$("[data-nav]").forEach((link) => {
+  link.addEventListener("click", () => {
+    const target = link.dataset.nav;
+
+    if (target === "categories") {
+      returnToCategories();
+    } else if (target === "home") {
+      goHome();
+    }
+  });
+});
+
+// Banner slider
+const bannerImages = [
+  "bannerhlm1.png",
+  "bannerhlm2.png",
+  "bannerhlm3.png"
+];
+
+let activeBannerIndex = 0;
+
+function setBanner(index) {
+  const banner = $("#heroBanner");
+  if (!banner) return;
+
+  activeBannerIndex = (index + bannerImages.length) % bannerImages.length;
+  banner.src = bannerImages[activeBannerIndex];
+
+  $$(".banner-dot").forEach((dot, dotIndex) => {
+    dot.classList.toggle("active", dotIndex === activeBannerIndex);
+  });
+}
+
+$$(".banner-dot").forEach((dot) => {
+  dot.addEventListener("click", () => {
+    setBanner(Number(dot.dataset.banner));
+  });
+});
+
+window.setInterval(() => {
+  // Ganti banner otomatis hanya saat halaman utama terlihat.
+  if (!$("#categoryPage")?.classList.contains("hidden")) return;
+  setBanner(activeBannerIndex + 1);
+}, 5000);
+
+// Tahun di footer
+$("#currentYear").textContent = new Date().getFullYear();
+
+// Perbaikan gambar kategori yang tidak ditemukan
+document.addEventListener("error", (event) => {
+  const target = event.target;
+
+  if (
+    target instanceof HTMLImageElement &&
+    !target.dataset.fallbackApplied &&
+    target.getAttribute("src") !== STORE_LOGO
+  ) {
+    target.dataset.fallbackApplied = "true";
+    target.src = STORE_LOGO;
+  }
+}, true);
+
+// Tampilkan kategori saat website dibuka
 renderCategories();
+setBanner(0);
