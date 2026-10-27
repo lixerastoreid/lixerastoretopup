@@ -1,239 +1,353 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#09090f">
-  <meta name="description" content="LIXERA STORE TOP UP - Top up game dan voucher digital.">
-  <title>LIXERA STORE TOP UP</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#090d18">
+  <meta name="description" content="LIXERA STORE - Top up game dan hiburan digital cepat, aman, dan praktis.">
+  <title>LIXERA STORE — Top Up Game</title>
+  <link rel="icon" href="logolixerastore.jpg">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<header class="site-header">
-  <a href="#" class="brand" id="homeLink">
-    <img src="logolixerastore.jpg" alt="Lixera Store" class="brand-logo">
-    <span>LIXERA <b>STORE</b><small>TOP UP GAME & DIGITAL</small></span>
-  </a>
-
-  <button class="menu-toggle" id="menuToggle" aria-label="Buka menu">☰</button>
-
-  <nav class="main-nav" id="mainNav">
-    <a href="#beranda" data-nav="home">Beranda</a>
-    <a href="#kategori" data-nav="categories">Kategori</a>
-    <a href="#cara-order" data-nav="steps">Cara Order</a>
-    <a href="#kontak" data-nav="contact">Kontak</a>
-  </nav>
-</header>
-
-<main>
-  <section class="hero" id="beranda">
-    <div class="hero-copy">
-      <span class="eyebrow">WELCOME TO LIXERA STORE</span>
-      <h1>Top Up Favoritmu,<br><span>Lebih Praktis!</span></h1>
-      <p>Top up game dan voucher digital dengan proses pemesanan yang simpel.</p>
-      <a href="#kategori" class="primary-button" id="exploreButton">Jelajahi Kategori ↗</a>
-    </div>
-
-    <div class="hero-art">
-      <img id="heroBanner" src="bannerhlm1.png" alt="Promo Lixera Store">
-      <div class="banner-dots">
-        <button class="banner-dot active" data-banner="0" aria-label="Banner 1"></button>
-        <button class="banner-dot" data-banner="1" aria-label="Banner 2"></button>
-        <button class="banner-dot" data-banner="2" aria-label="Banner 3"></button>
-      </div>
-    </div>
-  </section>
-
-  <section class="catalog-section" id="kategori">
-    <div class="section-heading">
-      <div>
-        <span class="eyebrow">PILIH FAVORITMU</span>
-        <h2>Kategori <span>Produk</span></h2>
-        <p>Pilih kategori untuk melihat daftar produknya.</p>
-      </div>
-      <div class="search-box" id="mainSearchBox">
-        <span>⌕</span>
-        <input id="searchInput" type="search" placeholder="Cari game atau kategori...">
-      </div>
-    </div>
-
-    <div class="category-tabs" id="categoryTabs">
-      <button class="tab-button active" data-group="Semua">Semua</button>
-      <button class="tab-button" data-group="Game">Game</button>
-      <button class="tab-button" data-group="PC Game">PC Game</button>
-      <button class="tab-button" data-group="Entertainment">Entertainment</button>
-    </div>
-
-    <div class="category-grid" id="categoryGrid"></div>
-    <p class="empty-state hidden" id="emptyState">Kategori tidak ditemukan.</p>
-  </section>
-</main>
-  
-<!-- HALAMAN KHUSUS KATEGORI -->
-<section class="category-page hidden" id="categoryPage">
-  <button class="back-button" id="backToCategories">← Kembali ke Kategori</button>
-
-  <div class="category-page-heading">
-    <div>
-      <span class="eyebrow">DAFTAR PRODUK</span>
-      <h2 id="categoryPageTitle">Nama Kategori</h2>
-      <p>Pilih jenis produk yang kamu butuhkan.</p>
-    </div>
+  <div class="announcement">
+    <span class="announcement-dot"></span>
+    TOP UP GAME & PRODUK DIGITAL • LIXERA STORE
   </div>
 
-  <div class="subcategory-filters" id="subcategoryFilters"></div>
-  <div class="product-grid" id="categoryProductGrid"></div>
-  <p class="empty-state hidden" id="categoryEmptyState">Belum ada produk pada pilihan ini.</p>
-</section>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#beranda" aria-label="LIXERA STORE Beranda">
+        <img src="logolixerastore.jpg" alt="Logo Lixera Store"
+             onerror="this.style.display='none'">
+        <span class="brand-copy">
+          <strong>LIXERA <em>STORE</em></strong>
+          <small>TOP UP • DIGITAL • ENTERTAINMENT</small>
+        </span>
+      </a>
 
-<!-- FORM PESANAN: MUNCUL SETELAH PRODUK DIPILIH -->
-<section class="order-section hidden" id="pesanan">
-  <div class="section-heading">
-    <div>
-      <span class="eyebrow">LANGKAH SELANJUTNYA</span>
-      <h2>Detail <span>Pesanan</span></h2>
-      <p>Isi data dengan benar sebelum melanjutkan.</p>
+      <button id="menuToggle" class="menu-toggle" type="button"
+              aria-label="Buka menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav id="mainNav" class="main-nav">
+        <a href="#beranda">Beranda</a>
+        <a href="#katalog">Katalog</a>
+        <a href="#cara-pesan">Cara Pesan</a>
+        <a href="#bantuan">Bantuan</a>
+      </nav>
+
+      <a class="header-order" href="#katalog">Pesan Sekarang <span>↗</span></a>
     </div>
-  </div>
+  </header>
 
-  <div class="order-layout">
-    <form class="order-form panel" id="orderForm">
-      <h3>Data Pembeli</h3>
+  <main>
+    <section id="beranda" class="hero-section">
+      <div class="hero-glow hero-glow-one"></div>
+      <div class="hero-glow hero-glow-two"></div>
 
-      <label for="buyerName">Nama pembeli</label>
-      <input id="buyerName" name="buyerName" type="text" placeholder="Nama kamu" required>
-
-      <label for="buyerContact">Nomor WhatsApp</label>
-      <input id="buyerContact" name="buyerContact" type="tel" placeholder="08xxxxxxxxxx" required>
-
-      <div id="gameFields"></div>
-
-      <label for="buyerNote">Catatan tambahan <span class="optional">(opsional)</span></label>
-      <textarea id="buyerNote" name="buyerNote" rows="3" placeholder="Catatan jika diperlukan"></textarea>
-
-      <button class="primary-button full-button" type="submit">Lanjut ke Pembayaran</button>
-    </form>
-
-    <aside class="order-summary panel">
-      <h3>Ringkasan Pesanan</h3>
-
-      <div id="summaryEmpty" class="summary-empty">
-        <span class="summary-icon">🛒</span>
-        <p>Belum ada produk dipilih.</p>
-        <small>Pilih produk dari halaman kategori terlebih dahulu.</small>
-      </div>
-
-      <div id="summaryDetails" class="hidden">
-        <div class="summary-product">
-          <img id="summaryImage" src="logolixerastore.jpg" alt="Produk">
-          <div>
-            <small id="summaryCategory">Kategori</small>
-            <h4 id="summaryProduct">Nama produk</h4>
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <div class="eyebrow"><span></span> DIGITAL TOP UP STORE</div>
+          <h1>Top Up Favoritmu,<br><span>Lebih Mudah.</span></h1>
+          <p>
+            Pilih game atau produk digital favoritmu, tentukan nominal,
+            lalu lanjutkan pesanan langsung melalui WhatsApp.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#katalog">
+              Jelajahi Katalog <span>→</span>
+            </a>
+            <a class="button button-ghost" href="#cara-pesan">Cara Pesan</a>
+          </div>
+          <div class="hero-trust">
+            <span><b>✓</b> Pilihan produk beragam</span>
+            <span><b>✓</b> Konfirmasi via WhatsApp</span>
           </div>
         </div>
 
-        <div class="summary-line">
-          <span>Harga</span>
-          <b id="summaryPrice">Hubungi admin</b>
+        <div class="hero-art">
+          <div class="hero-art-frame">
+            <img src="logolixerastore.jpg" alt="LIXERA STORE"
+                 onerror="this.style.display='none'">
+            <div class="hero-art-caption">
+              <span class="live-indicator"></span>
+              <div><strong>LIXERA STORE</strong><small>YOUR DIGITAL PARTNER</small></div>
+              <span class="hero-art-arrow">↗</span>
+            </div>
+          </div>
+          <div class="floating-chip chip-top">✦ GAME TOP UP</div>
+          <div class="floating-chip chip-bottom">⚡ SIMPLE & PRAKTIS</div>
         </div>
-        <div class="summary-line summary-total">
-          <span>Total</span>
-          <b id="summaryTotal">Hubungi admin</b>
-        </div>
-
-        <button type="button" class="text-button" id="changeProduct">← Pilih produk lain</button>
       </div>
-    </aside>
-  </div>
-</section>
 
-<!-- CARA ORDER -->
-<section class="steps-section" id="cara-order">
-  <div class="section-heading centered-heading">
-    <div>
-      <span class="eyebrow">MUDAH DAN PRAKTIS</span>
-      <h2>Cara <span>Order</span></h2>
-      <p>Ikuti langkah sederhana berikut.</p>
+      <div class="hero-bottom-line"></div>
+    </section>
+
+    <section class="benefit-strip" aria-label="Keunggulan toko">
+      <div class="benefit-item"><span class="benefit-icon">◈</span><div><strong>Banyak Pilihan</strong><small>Game & hiburan digital</small></div></div>
+      <div class="benefit-item"><span class="benefit-icon">⚡</span><div><strong>Proses Praktis</strong><small>Pesan dalam beberapa langkah</small></div></div>
+      <div class="benefit-item"><span class="benefit-icon">◎</span><div><strong>Konfirmasi Mudah</strong><small>Hubungi admin lewat WhatsApp</small></div></div>
+    </section>
+        <section id="katalog" class="catalog-section section-padding">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow"><span></span> PILIH PRODUK</div>
+          <h2>Katalog <span>Top Up</span></h2>
+          <p>Cari kategori yang kamu butuhkan, lalu pilih produk dan nominalnya.</p>
+        </div>
+        <div class="catalog-count"><span class="count-dot"></span> KATALOG LIXERA</div>
+      </div>
+
+      <div class="catalog-toolbar">
+        <div id="categoryTabs" class="category-tabs" role="tablist" aria-label="Filter kategori">
+          <button class="tab active" type="button" data-group="Game">Game</button>
+          <button class="tab" type="button" data-group="PC Game">PC Game</button>
+          <button class="tab" type="button" data-group="Entertainment">Entertainment</button>
+        </div>
+
+        <label class="search-box">
+          <span class="search-icon">⌕</span>
+          <input id="searchInput" type="search" placeholder="Cari game atau produk..."
+                 autocomplete="off">
+          <span class="search-shortcut">⌕</span>
+        </label>
+      </div>
+
+      <div id="categoryGrid" class="category-grid"></div>
+
+      <div id="emptyState" class="empty-state hidden">
+        <span class="empty-icon">⌕</span>
+        <h3>Produk tidak ditemukan</h3>
+        <p>Coba kata kunci lain atau pilih kategori berbeda.</p>
+      </div>
+
+      <!-- Halaman kategori: ditampilkan saat kategori dipilih -->
+      <section id="categoryPage" class="category-page hidden">
+        <button id="backToCategories" class="back-button" type="button">
+          <span>←</span> Kembali ke katalog
+        </button>
+
+        <div class="category-page-heading">
+          <div class="category-page-identity">
+            <img id="categoryPageImage" src="logolixerastore.jpg" alt="">
+            <div>
+              <div class="eyebrow"><span></span> PILIH NOMINAL</div>
+              <h2 id="categoryPageTitle">Nama Kategori</h2>
+              <p>Pilih paket yang sesuai dengan kebutuhanmu.</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="subcategoryFilters" class="subcategory-filters"></div>
+        <div id="categoryProductGrid" class="product-grid"></div>
+
+        <div id="categoryEmptyState" class="empty-state hidden">
+          <span class="empty-icon">⌕</span>
+          <h3>Nominal tidak ditemukan</h3>
+          <p>Coba pilih filter atau kata kunci lain.</p>
+        </div>
+      </section>
+    </section>
+
+    <section id="cara-pesan" class="how-section section-padding">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow"><span></span> MUDAH DAN PRAKTIS</div>
+          <h2>Cara <span>Pesan</span></h2>
+          <p>Ikuti langkah singkat ini untuk mengirim pesanan ke admin.</p>
+        </div>
+      </div>
+
+      <div class="steps-grid">
+        <article class="step-card">
+          <span class="step-number">01</span>
+          <div class="step-icon">▦</div>
+          <h3>Pilih Kategori</h3>
+          <p>Buka kategori game atau produk digital yang kamu inginkan.</p>
+        </article>
+        <article class="step-card">
+          <span class="step-number">02</span>
+          <div class="step-icon">◇</div>
+          <h3>Pilih Nominal</h3>
+          <p>Pilih paket, isi data akun yang diminta, lalu lengkapi detail pesanan.</p>
+        </article>
+        <article class="step-card">
+          <span class="step-number">03</span>
+          <div class="step-icon">↗</div>
+          <h3>Hubungi Admin</h3>
+          <p>Kirim ringkasan pesanan melalui WhatsApp dan ikuti instruksi admin.</p>
+        </article>
+      </div>
+          </section>
+              <section id="pesanan" class="order-section section-padding">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow"><span></span> CHECKOUT PESANAN</div>
+          <h2>Detail <span>Pesanan</span></h2>
+          <p>Pilih produk dari katalog terlebih dahulu agar formulir bisa diisi.</p>
+        </div>
+      </div>
+
+      <div class="checkout-layout">
+        <div class="checkout-main">
+          <div class="checkout-card">
+            <div class="checkout-card-heading">
+              <span class="checkout-step">01</span>
+              <div><h3>Produk Pilihan</h3><p>Ringkasan produk yang akan dipesan.</p></div>
+            </div>
+
+            <div id="summaryEmpty" class="summary-empty">
+              <span class="summary-empty-icon">＋</span>
+              <strong>Belum ada produk dipilih</strong>
+              <p>Pilih kategori dan nominal di katalog terlebih dahulu.</p>
+              <a class="text-link" href="#katalog">Buka katalog <span>→</span></a>
+            </div>
+
+            <div id="summaryDetails" class="summary-details hidden">
+              <img id="summaryImage" src="logolixerastore.jpg" alt="Produk pilihan">
+              <div class="summary-product-copy">
+                <span id="summaryCategory" class="summary-category">Kategori</span>
+                <strong id="summaryProduct">Nama produk</strong>
+                <span id="summaryPrice" class="summary-price">Rp0</span>
+              </div>
+              <button id="changeProduct" class="change-product" type="button">Ganti</button>
+            </div>
+          </div>
+
+          <form id="orderForm" class="checkout-card">
+            <div class="checkout-card-heading">
+              <span class="checkout-step">02</span>
+              <div><h3>Informasi Pesanan</h3><p>Pastikan data yang dimasukkan benar.</p></div>
+            </div>
+
+            <div id="gameFields" class="form-grid">
+              <p class="form-hint">Kolom ID akun akan muncul setelah kamu memilih produk.</p>
+            </div>
+
+            <div class="form-divider"></div>
+
+            <div class="form-grid">
+              <label class="form-label">
+                Nama Pemesan <span>*</span>
+                <input id="buyerName" name="buyerName" type="text"
+                       placeholder="Masukkan nama kamu" required maxlength="80"
+                       autocomplete="name">
+              </label>
+
+              <label class="form-label">
+                Nomor WhatsApp
+                <input id="buyerContact" name="buyerContact" type="tel"
+                       placeholder="Contoh: 08xxxxxxxxxx" maxlength="25"
+                       autocomplete="tel">
+              </label>
+
+              <label class="form-label full-width">
+                Catatan Tambahan
+                <textarea id="buyerNote" name="buyerNote" rows="3"
+                          placeholder="Catatan untuk admin (opsional)" maxlength="500"></textarea>
+              </label>
+            </div>
+
+            <div class="form-submit-row">
+              <div class="secure-note"><span>✓</span> Periksa kembali data sebelum mengirim.</div>
+              <button class="button button-primary submit-order" type="submit">
+                Lanjutkan Pesanan <span>→</span>
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <aside class="checkout-aside">
+          <div class="checkout-card total-card">
+            <div class="total-card-heading">
+              <span class="total-icon">▤</span>
+              <div><h3>Ringkasan</h3><p>Estimasi total pesanan</p></div>
+            </div>
+            <div class="total-line">
+              <span>Produk</span>
+              <strong id="summaryTotal">Rp0</strong>
+            </div>
+            <div class="total-line">
+              <span>Biaya tambahan</span>
+              <strong>Rp0</strong>
+            </div>
+            <div class="total-grand">
+              <span>Total</span>
+              <strong id="paymentTotal">Pilih produk</strong>
+            </div>
+            <p class="total-disclaimer">
+              Konfirmasi harga dan pembayaran dilakukan bersama admin melalui WhatsApp.
+            </p>
+          </div>
+
+          <div class="help-card">
+            <div class="help-card-icon">?</div>
+            <h3>Butuh bantuan?</h3>
+            <p>Jika bingung memilih produk atau mengisi data, hubungi admin LIXERA STORE.</p>
+            <a href="https://wa.me/628818238236" target="_blank" rel="noopener noreferrer">
+              Hubungi Admin <span>↗</span>
+            </a>
+          </div>
+        </aside>
+      </div>
+              </section>
+                  <section id="bantuan" class="support-section section-padding">
+      <div class="support-panel">
+        <div class="support-copy">
+          <div class="eyebrow"><span></span> LIXERA STORE SUPPORT</div>
+          <h2>Ada yang ingin <span>ditanyakan?</span></h2>
+          <p>Hubungi admin untuk konfirmasi pesanan, harga, dan petunjuk pembayaran.</p>
+        </div>
+        <a class="button button-primary"
+           href="https://wa.me/628818238236"
+           target="_blank" rel="noopener noreferrer">
+          Chat Admin WhatsApp <span>↗</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <a class="brand footer-brand" href="#beranda">
+        <img src="logolixerastore.jpg" alt="Logo Lixera Store"
+             onerror="this.style.display='none'">
+        <span class="brand-copy">
+          <strong>LIXERA <em>STORE</em></strong>
+          <small>YOUR DIGITAL PARTNER</small>
+        </span>
+      </a>
+      <p>Top up game dan produk digital favoritmu.</p>
+      <span class="footer-copyright">© <span id="currentYear">2026</span> LIXERA STORE. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+  <div id="paymentModal" class="modal-backdrop hidden" role="dialog"
+       aria-modal="true" aria-labelledby="paymentModalTitle">
+    <div class="modal-card">
+      <button id="closePayment" class="modal-close" type="button"
+              aria-label="Tutup">×</button>
+      <div class="modal-symbol">✓</div>
+      <div class="eyebrow modal-eyebrow"><span></span> KONFIRMASI</div>
+      <h2 id="paymentModalTitle">Pesanan siap dikirim</h2>
+      <p>Periksa ringkasan pesanan. Selanjutnya kamu akan diarahkan ke WhatsApp admin.</p>
+      <div class="modal-total">
+        <span>Total pesanan</span>
+        <strong id="modalTotal">Rp0</strong>
+      </div>
+      <div class="modal-actions">
+        <button id="cancelPayment" class="button button-ghost" type="button">Periksa Lagi</button>
+        <button id="confirmWhatsApp" class="button button-primary" type="button">
+          Kirim WhatsApp <span>↗</span>
+        </button>
+      </div>
     </div>
   </div>
 
-  <div class="steps-grid">
-    <article class="step-card">
-      <span>01</span>
-      <h3>Pilih Kategori</h3>
-      <p>Pilih game atau layanan yang kamu inginkan.</p>
-    </article>
-    <article class="step-card">
-      <span>02</span>
-      <h3>Pilih Produk</h3>
-      <p>Gunakan filter kecil untuk menemukan produk.</p>
-    </article>
-    <article class="step-card">
-      <span>03</span>
-      <h3>Isi Data</h3>
-      <p>Masukkan data akun sesuai petunjuk produk.</p>
-    </article>
-    <article class="step-card">
-      <span>04</span>
-      <h3>Konfirmasi</h3>
-      <p>Lanjutkan melalui WhatsApp untuk konfirmasi pesanan.</p>
-    </article>
-  </div>
-  </section>
-  
-<!-- MODAL PEMBAYARAN -->
-<div class="modal-overlay hidden" id="paymentModal">
-  <div class="payment-modal">
-    <button class="modal-close" id="closePayment" aria-label="Tutup">×</button>
-    <span class="eyebrow">KONFIRMASI PESANAN</span>
-    <h2>Konfirmasi <span>Pembayaran</span></h2>
-    <p class="modal-description">Scan QRIS atau lanjutkan ke WhatsApp admin untuk mengonfirmasi pesanan.</p>
-
-    <div class="payment-amount">
-      <small>Total pesanan</small>
-      <strong id="paymentTotal">Hubungi admin</strong>
-    </div>
-
-    <div class="qris-container">
-      <img src="qrislixerastore.jpg" alt="QRIS Lixera Store" id="qrisImage">
-    </div>
-    <p class="qris-note">Pastikan nominal dan tujuan pembayaran sudah benar sebelum membayar.</p>
-
-    <button class="primary-button full-button" id="confirmWhatsApp" type="button">
-      Konfirmasi via WhatsApp
-    </button>
-    <button class="secondary-button full-button" id="cancelPayment" type="button">
-      Kembali ke Pesanan
-    </button>
-  </div>
-</div>
-
-<div class="toast hidden" id="toast" role="status"></div>
-
-<footer class="site-footer" id="kontak">
-  <div class="footer-main">
-    <a href="#" class="brand footer-brand" id="footerHomeLink">
-      <img src="logolixerastore.jpg" alt="Lixera Store" class="brand-logo">
-      <span>LIXERA <b>STORE</b><small>TOP UP GAME & DIGITAL</small></span>
-    </a>
-    <p>Tempat top up game dan voucher digital dengan proses pemesanan yang mudah.</p>
-    <a class="footer-whatsapp" href="https://wa.me/628818238236" target="_blank" rel="noopener noreferrer">
-      Hubungi Admin WhatsApp ↗
-    </a>
-  </div>
-  <div class="footer-bottom">
-    <span>© <span id="currentYear"></span> LIXERA STORE</span>
-    <span>Made for gamers.</span>
-  </div>
-</footer>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
-
-  
