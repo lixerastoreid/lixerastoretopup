@@ -81,12 +81,11 @@
           <p id="detailCategoryDescription">Pilih jenis produk yang kamu inginkan.</p>
         </div>
       </div>
-
       <div class="subcategory-tabs" id="subcategoryTabs"></div>
       <div class="detail-product-list" id="detailProductList"></div>
       <p class="empty-state hidden" id="detailEmptyState">Produk di subkategori ini belum tersedia.</p>
     </section>
-
+    
     <section class="order-section hidden" id="pesanan">
       <div class="section-heading">
         <div>
@@ -109,6 +108,7 @@
           <label>Nama pembeli
             <input id="buyerName" name="buyerName" placeholder="Nama kamu" required maxlength="70">
           </label>
+
           <label>Email / nomor kontak (opsional)
             <input id="buyerContact" name="buyerContact" placeholder="Email atau nomor WhatsApp">
           </label>
@@ -127,11 +127,13 @@
 
         <aside class="summary-card">
           <div class="summary-head"><span>Ringkasan</span><span class="summary-bag">▤</span></div>
+
           <div id="summaryEmpty" class="summary-empty">
             <span class="empty-bag">＋</span>
             <b>Belum ada produk</b>
             <p>Pilih kategori dan produk yang ingin kamu beli.</p>
           </div>
+
           <div id="summaryDetails" class="summary-details hidden">
             <div class="summary-product">
               <img id="summaryImage" src="logolixerastore.jpg" alt="Produk terpilih">
@@ -140,22 +142,57 @@
                 <small id="summaryCategory">—</small>
               </div>
             </div>
+
             <div class="summary-line"><span>Harga produk</span><b id="summaryPrice">Rp0</b></div>
             <div class="summary-line"><span>Biaya layanan</span><b>Rp0</b></div>
+
+            <div class="coupon-box">
+              <label for="couponInput">Kode promo</label>
+              <div class="coupon-controls">
+                <input id="couponInput" type="text" placeholder="Masukkan kode promo" autocomplete="off">
+                <button type="button" id="applyCoupon">Pakai</button>
+              </div>
+              <p id="couponMessage" class="coupon-message" aria-live="polite"></p>
+            </div>
+
+            <div class="summary-line discount-line hidden" id="discountLine">
+              <span>Diskon promo</span>
+              <b id="discountAmount">-Rp0</b>
+            </div>
+
             <div class="summary-total"><span>Total</span><b id="summaryTotal">Rp0</b></div>
           </div>
+
           <div class="summary-foot">🔒 <span>Harga ditampilkan dalam Rupiah (IDR).</span></div>
         </aside>
       </div>
     </section>
-
+    
     <section class="account-section" id="akun">
-      <div>
+      <div class="account-help">
         <p class="eyebrow">BUTUH BANTUAN?</p>
         <h2>Admin Lixera Store siap membantu.</h2>
         <p>Hubungi admin jika ada pertanyaan tentang produk atau pesanan.</p>
+        <a class="wa-button" href="https://wa.me/628818238236" target="_blank" rel="noopener">☏ Chat Admin WhatsApp</a>
       </div>
-      <a class="wa-button" href="https://wa.me/628818238236" target="_blank" rel="noopener">☏ Chat Admin WhatsApp</a>
+
+      <div class="optional-account">
+        <p class="eyebrow">AKUN OPSIONAL</p>
+        <h2>Simpan data pembeli</h2>
+        <p>Simpan nama dan kontak di perangkat ini agar tidak perlu mengisi ulang. Kamu tetap bisa belanja tanpa menyimpan akun.</p>
+
+        <form id="accountForm">
+          <label>Nama
+            <input id="accountName" type="text" maxlength="70" placeholder="Nama kamu">
+          </label>
+          <label>Email / nomor kontak
+            <input id="accountContact" type="text" placeholder="Email atau nomor WhatsApp">
+          </label>
+          <button type="submit" class="primary-btn full">Simpan Data</button>
+          <button type="button" id="clearAccount" class="account-clear">Hapus Data Tersimpan</button>
+          <p id="accountMessage" class="account-message" aria-live="polite"></p>
+        </form>
+      </div>
     </section>
   </main>
 
@@ -188,5 +225,4 @@
 
   <script src="script.js" defer></script>
 </body>
-  </html>
-  
+</html>
